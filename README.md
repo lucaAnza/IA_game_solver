@@ -19,3 +19,9 @@ pyautogui library
 - Learn PyAutoGUI’s ("https://pyautogui.readthedocs.io/en/latest/")
 - Use it on online web site to play a game ("https://play2048.co/")
   - It's enough a ciclo of input RIGHT-LEFT-UP-DOWN
+
+## 2. Recognised numbers from an image
+1. Only one digit
+2. More than one digits
+3. Matrix of numbers
+
