@@ -3,7 +3,9 @@ import time
 
 # Funzione per automatizzare la scrittura di testo con PyAutoGUI
 def scrivi_testo(testo, intervallo=0.1):
-    time.sleep(10)  # Aggiungi un ritardo per passare il focus all'applicazione di destinazione (se necessario)
+    waiting = 5
+    print("Attesa di " + str(waiting) + " secondi...")
+    time.sleep(waiting)  # Aggiungi un ritardo per passare il focus all'applicazione di destinazione (se necessario)
     pyautogui.typewrite(testo, interval=intervallo)
 
 '''# Funzione per simulare la pressione di un tasto speciale
