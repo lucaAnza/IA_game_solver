@@ -18,3 +18,7 @@ pyautogui library
 # STEPS
 
 ## 1. Autome resolution for online game ( no algoritm )
+- Learn PyAutoGUI’s ("https://pyautogui.readthedocs.io/en/latest/")
+- Use it on online web site to play a game ("https://play2048.co/")
+    - It's enough a ciclo of input RIGHT-LEFT-UP-DOWN
+
