@@ -17,11 +17,11 @@ pyautogui library
 ## 1. Autome resolution for online game ( no algoritm )
 
 - Learn PyAutoGUI’s ("https://pyautogui.readthedocs.io/en/latest/")
-- Use it on online web site to play a game ("https://play2048.co/")
-  - It's enough a ciclo of input RIGHT-LEFT-UP-DOWN
+- Automate playing a web-based game ("https://play2048.com/")
+  - Simple imput of: RIGHT-LEFT-UP-DOWN
 
-## 2. Recognised numbers from an image
-1. Only one digit
-2. More than one digits
-3. Matrix of numbers
+## 2. Recognize numbers from an image
 
+1. One digit integer
+2. Multiple digit integer
+3. Matrix of integers
