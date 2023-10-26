@@ -9,7 +9,7 @@ import numpy as np
 #immagini sotto una certa tonalità
 
 #Lettura immagine
-img_cv2 = cv2.imread("numero.png")
+img_cv2 = cv2.imread("numero2.png")
 
 # Cvt to hsv
 hsv = cv2.cvtColor(img_cv2, cv2.COLOR_BGR2HSV)
@@ -22,4 +22,4 @@ thr = 255 - cv2.bitwise_and(dlt, msk)
 
 # OCR
 d = pytesseract.image_to_string(thr, config="--psm 10")
-print("alo",d)
+print(d)
