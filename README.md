@@ -1,5 +1,3 @@
-# IA_game_solver
-
 Using AI to autosolve a game hosted on a Windows machine
 
 # STEPS
