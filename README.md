@@ -14,7 +14,7 @@ pyautogui library
 
 # STEPS
 
-## 1. Autome resolution for online game ( no algoritm )
+## 1. Automate resolution for online game ( no algoritm )
 
 - Learn PyAutoGUI’s ("https://pyautogui.readthedocs.io/en/latest/")
 - Automate playing a web-based game ("https://play2048.com/")
