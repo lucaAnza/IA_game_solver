@@ -25,8 +25,8 @@ for riga in range(4):
         coordinate_celle.append((x1, y1, x2, y2))
 
         cell_img = img.crop((x1,y1,x2,y2))
-        cell_img.show()
-        time.sleep(2)
+        #cell_img.show()
+        #time.sleep(2)
         testo_cell = pytesseract.image_to_string(cell_img,config='--psm 6',lang='eng')
         try:
             numero = int(testo_cell)
@@ -41,3 +41,11 @@ for riga in range(4):
 
 
 print(numeri_celle)
+
+#stampa in forma matriciale:
+for i in range(16):
+    div = i+1
+    print(numeri_celle[i],end=' ')
+    if div%4 == 0:
+        print("")
+    
