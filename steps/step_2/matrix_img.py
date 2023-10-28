@@ -1,4 +1,5 @@
 import cv2
+import time
 import pytesseract
 from PIL import Image
 
@@ -16,23 +17,25 @@ for riga in range(4):
     # Scorrere le colonne
     for colonna in range(4):
         # Calcola le coordinate della cella corrente
-        x1 = colonna * larghezza_cella
-        y1 = riga * altezza_cella
-        x2 = x1 + larghezza_cella
-        y2 = y1 + altezza_cella
+        x1 = colonna * larghezza_cella + larghezza_cella * 0.1
+        y1 = riga * altezza_cella + altezza_cella * 0.1
+        x2 = x1 + larghezza_cella * 0.7
+        y2 = y1 + altezza_cella * 0.7
         # Aggiungi le coordinate alla lista
         coordinate_celle.append((x1, y1, x2, y2))
 
         cell_img = img.crop((x1,y1,x2,y2))
         cell_img.show()
-        input()
+        time.sleep(2)
         testo_cell = pytesseract.image_to_string(cell_img,config='--psm 6',lang='eng')
         try:
             numero = int(testo_cell)
             print("Numero trovato: ",numero)
             numeri_celle.append(numero)
         except:
-            print("failed - ", testo_cell)
+            print("failed - traduzione in 8 di: ", testo_cell,)
+            numero = 8
+            numeri_celle.append(numero)
             
         
 
