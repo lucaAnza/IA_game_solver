@@ -14,4 +14,5 @@ text2 = pytesseract.image_to_string(img, config="--psm 7")
 
 print("\nnumero riconosciuto:", text)
 print("\nnumero riconosciuto:", text2)
+print("son matto andrea\n")
 
