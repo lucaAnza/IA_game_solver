@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import sys
+import time
 
 # Ricorda per chiudere il processo : kill -9 $(pgrep -n "python")
 
@@ -18,6 +19,7 @@ sfondo_R = (200,250)
 sfondo_G = (180,220)
 sfondo_B = (180,230)
 
+#Dato l'array dei pixel, scarta i pixel di sfondo e fa una media degli altri
 def avg_channel(array , channel_type = 'R'):
     sum = 0
     if(channel_type == 'R'):
@@ -39,8 +41,7 @@ def avg_channel(array , channel_type = 'R'):
             if( not(elem >= sfondo_B[0] and elem <= sfondo_B[1] ) ):    # In questo modo scarta i pixel di sfondo
                 sum = sum + elem
     
-    print(channel_type + ":")
-    print(sum/len(array))
+    return sum/len(array)
 
 
 def analizza_immagine(immagine):
@@ -63,19 +64,32 @@ def analizza_immagine(immagine):
     print(f"Altezza: {altezza} pixel")
     print(f"Larghezza: {larghezza} pixel")
     print(f"Numero di pixel: {numero_pixel}")
-    print(f"Media del canale 1: {media_canale1}")
-    print(f"Media del canale 2: {media_canale2}")
-    print(f"Media del canale 3: {media_canale3}")
-    #print(f"Valore del pixel alla posizione (100, 50): {pixel_valore}")
     
+    #Crea un array di pixel ( ogni pixel è un array di 3 )
     arr = []
     for i in range(larghezza):
         for j in range(larghezza):
             arr.append(immagine[i,j])
 
-    avg_channel(arr , "B")
-    avg_channel(arr , "G")
-    avg_channel(arr , "R")
+    
+    incertezza = 2
+    green = int(avg_channel(arr , "G"))
+    red = int(avg_channel(arr , "R"))
+
+    print(f'Green : {green}')
+    print(f'Red : {green}')
+
+    sum = green+red
+    cappello_low = 42
+    cappello_high = 44
+    cappello_sum = cappello_low + cappello_high
+    if( sum-incertezza*2 < cappello_sum and cappello_sum < sum+incertezza*2):
+        print("Cappello")
+
+    
+
+
+    
 
 
     
@@ -102,14 +116,21 @@ immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + 
 
 # Visualizza l'immagine originale e l'immagine ritagliata
 #cv2.imshow("Immagine originale", immagine)
-cv2.imshow("Immagine ritagliata", immagine_ritagliata)
-analizza_immagine(immagine_ritagliata)
+scelta = input("Immagine originale? (y/n) : ")
+if(scelta == 'y' or scelta == 'yes'):
+    cv2.imshow("Immagine originale", immagine)
+    analizza_immagine(immagine)
+else:
+    cv2.imshow("Immagine ritagliata", immagine_ritagliata)
+    analizza_immagine(immagine_ritagliata)
+
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 
 
-
+# Green,Red
 #SKATE 30,35
 #PIZZA 27,25
 #CAPPELLO 42,44
