@@ -115,8 +115,8 @@ x_inizio, y_inizio, larghezza, altezza = 15, 265, 80, 80
 immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
 
 # Visualizza l'immagine originale e l'immagine ritagliata
-#cv2.imshow("Immagine originale", immagine)
 scelta = input("Immagine originale? (y/n) : ")
+#scelta = 'y'
 if(scelta == 'y' or scelta == 'yes'):
     cv2.imshow("Immagine originale", immagine)
     analizza_immagine(immagine)
@@ -125,7 +125,13 @@ else:
     analizza_immagine(immagine_ritagliata)
 
 
-cv2.waitKey(0)
+
+time.sleep(1)             # In questa fase premi invio -> Per problemi di buffering
+while True:
+    key = cv2.waitKeyEx(0)
+    if(chr(key) == 'q'):
+        print(f"Fine sessione [ tasto premuto = {chr(key)} ] ")
+        break
 cv2.destroyAllWindows()
 
 
