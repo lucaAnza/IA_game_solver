@@ -19,6 +19,67 @@ sfondo_R = (200,250)
 sfondo_G = (180,220)
 sfondo_B = (180,230)
 
+
+
+#Struttura dati che tiene i dati di check
+defalt_pixel = { 
+    'hat' : (42,44) ,
+    'iced_hat' : (0,0) ,
+    'skate' : (30,35) ,
+    'iced_skate' : (0,0) ,
+    'pizza' : (27,25) ,
+    'iced_pizza' : (0,0) ,
+    'can' : (0,0) ,
+    'iced_can' : (0,0) ,
+    'star' : (0,0) }
+
+
+
+
+#Classe per gli oggetti
+class item:
+    def __init__(self, green, red , nome = "General_item"):
+        self.nome = nome
+        self.green = green
+        self.red = red
+        self.sum = green+red
+    
+    def getItemType(self):
+        hat_sum = defalt_pixel["hat"][0] + defalt_pixel["hat"][1]
+        pizza_sum = defalt_pixel["pizza"][0] + defalt_pixel["pizza"][1]
+        skate_sum = defalt_pixel["skate"][0] + defalt_pixel["skate"][1]
+        
+        #Hat
+        if self.__isInIntervall(self.sum , hat_sum):
+           return 'cappello'
+        #Skate
+        elif self.__isInIntervall(self.sum , skate_sum):
+           return 'skate'
+        #Pizza
+        elif self.__isInIntervall(self.sum , pizza_sum):
+           return 'pizza'
+        elif self.__isInIntervall(self.sum , hat_sum):
+           return 'cappello'
+        elif self.__isInIntervall(self.sum , hat_sum):
+           return 'cappello'
+        elif self.__isInIntervall(self.sum , hat_sum):
+           return 'cappello'
+        elif self.__isInIntervall(self.sum , hat_sum):
+           return 'cappello'
+        else:
+            return 'Recognised = NULL'
+        
+    
+    def __isInIntervall(self , sum , defalt_sum , debug = False):
+        incertezza = 2
+        if(debug):
+            print(f"-------\nIncertezza : {incertezza}\nSum : {sum}\nDefault_sum = {defalt_sum}\n---------")
+        return ( sum-incertezza*2 < defalt_sum and defalt_sum < sum+incertezza*2)
+            
+
+    
+
+
 #Dato l'array dei pixel, scarta i pixel di sfondo e fa una media degli altri
 def avg_channel(array , channel_type = 'R'):
     sum = 0
@@ -72,19 +133,21 @@ def analizza_immagine(immagine):
             arr.append(immagine[i,j])
 
     
-    incertezza = 2
     green = int(avg_channel(arr , "G"))
     red = int(avg_channel(arr , "R"))
+    output_analysis = item(green , red)
+
+    print(output_analysis.getItemType())
 
     print(f'Green : {green}')
-    print(f'Red : {green}')
+    print(f'Red : {red}')
 
-    sum = green+red
-    cappello_low = 42
-    cappello_high = 44
-    cappello_sum = cappello_low + cappello_high
-    if( sum-incertezza*2 < cappello_sum and cappello_sum < sum+incertezza*2):
-        print("Cappello")
+
+    
+
+
+
+ 
 
     
 
@@ -106,11 +169,13 @@ if immagine is None:
     sys.exit()
     
 # Specifica le coordinate del rettangolo da ritagliare
-x_inizio, y_inizio, larghezza, altezza = 15, 265, 80, 80
+x_inizio, y_inizio, larghezza, altezza = 15, 433, 80, 80
 #170 CAP2
 #85 LAT1
 #250 PIZZA
 #333 SKATE
+
+
 # Esegui il ritaglio dell'immagine
 immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
 
