@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Carico IMG con CV2
-img = cv2.imread("Screen2.png")
+img = cv2.imread("Screen.png")
 
 # Dimnensione immagine
 altezza_immagine, larghezza_immagine, _ = img.shape
