@@ -1,14 +1,14 @@
 import cv2
 import numpy as np
 
-# Carico IMG con CV2
+# Carico immagine e controllo per debug
 img = cv2.imread("Screen.png")
+if img == None:
+    print("ERRORE: Immagine non aperta correttamente")
 
 # Dimnensione immagine
 altezza_immagine, larghezza_immagine, _ = img.shape
 
-# Verifica immagine oringiale sia aperta correttamente
-cv2.imshow("immagine", img)
 
 # Dimensione matrice
 num_righe = 6
@@ -20,9 +20,17 @@ altezza_cella = altezza_immagine // num_righe
 
 coordinate_celle = []
 
+matrice_immagini = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+]
+
 
 for riga in range(num_righe):
-    # Scorrere le colonne
     for colonna in range(num_colonne):
         # Calcola le coordinate della cella corrente
         x1 = colonna * larghezza_cella
@@ -35,7 +43,16 @@ for riga in range(num_righe):
 
         # Ritaglia la cella dall'immagine
         cell_img = img[y1:y2, x1:x2]
-        cv2.imshow("Cella Ritagliata", cell_img)
-        cv2.waitKey(2000)
+        # cv2.imshow("Cella Ritagliata", cell_img)
+        # cv2.waitKey(2000)
+        matrice_immagini[riga].append(cell_img)
 
+
+cont = 1
+for i in range(num_righe):
+    for j in range(num_colonne):
+        cv2.imshow(f"Immagine {cont}",
+                   matrice_immagini[i][j])
+        cv2.waitKey(800)
+        cont += 1
 cv2.destroyAllWindows()
