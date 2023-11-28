@@ -3,8 +3,7 @@ import numpy as np
 
 # Carico immagine e controllo per debug
 img = cv2.imread("Screen.png")
-if img == None:
-    print("ERRORE: Immagine non aperta correttamente")
+
 
 # Dimnensione immagine
 altezza_immagine, larghezza_immagine, _ = img.shape
