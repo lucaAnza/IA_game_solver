@@ -27,19 +27,49 @@ def check_adj_row(l):
             if l[i] == l[i+1]:
                 return i
 
-# controlla che il range sia valido
+
+def check_adj_column(M, j):
+    for i in range(6):
+        if (i == 5):
+            return -1
+        else:
+            if M[i][j] == M[i+1][j]:
+                return i
 
 
+# controlla che il range sia valido per controllo orizzontale
 def valid_bound(i, j):
     if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
         return True
     print("(((Elemento out of bounds)))")
     return False
 
-# da eliminare i return true con gli indici dell'elemento da tradurr
+
+# controlla che il range sia valido per controllo verticale
+def valid_col_bound(i):
+    if (i >= 0 and i <= 5):
+        return True
+    print("(((Elemento out of bounds)))")
+    return False
 
 
-def check_feasibility(i, j, matrice):
+def check_column_feasibility(i, j, matrice):
+    el1 = matrice[i][j]
+    el2 = matrice[i+1][j]
+    if ((valid_col_bound(i+3)) and (matrice[i+3][j] == el2)):
+        print(f">>OUTPUT>> Mossa -> Sposta M[{i+3}][{j}] verso nord")
+        return True
+    elif ((valid_col_bound(i-2)) and (matrice[i-2][j] == el1)):
+        print(f">>OUTPUT>> Mossa -> Sposta M[{i-2}][{j}] verso sud")
+        return True
+
+    # nessuna possibile mossa trovata
+    print(
+        f">>OUTPUT>> Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
+
+
+# da eliminare i return true con gli indici dell'elemento da tradurre
+def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i][j+1]
     # controllo elementi di sinistra:
@@ -59,20 +89,35 @@ def check_feasibility(i, j, matrice):
 
     # nessuna possibile mossa trovata
     print(
-        f">>OUTPUT>> Nessuna mossa valida trova per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
+        f">>OUTPUT>> Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
     return False
 
 
 r = 0
 c = 0
-for i in range(6):  # controllo per righe
-    c = check_adj_row(matrice2[i])
-    if c != -1:  # condizione di adiacenza
-        print("Trovati due elementi simili nella riga ", i)
-        print("Indici = [", c, ",", c+1, "] -> ",
-              matrice2[i][c], " ", matrice2[i][c+1], "\tinizio controllo feasibility")
-        check_feasibility(i, c, matrice2)
+
+
+def controllo_righe():
+    for i in range(6):  # controllo per righe
+        c = check_adj_row(matrice2[i])
+        if c != -1:  # condizione di adiacenza
+            print("Trovati due elementi simili nella riga ", i)
+            print("Indici = [", c, ",", c+1, "] -> ",
+                  matrice2[i][c], " ", matrice2[i][c+1], "\tinizio controllo feasibility")
+            check_row_feasibility(i, c, matrice2)
+            print()
+            # [1, 2, 4, 4, 5]
+        else:
+            print("Nessun elemento adiacente nella riga: ", i, "\n")
+
+
+for j in range(5):  # controllo per colonne
+    riga_index = check_adj_column(matrice2, j)
+    if riga_index != -1:  # condizione di adiacenza
+        print("Trovati due elementi simili nella colonna ", j)
+        print(
+            f"Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]}")
+        check_column_feasibility(riga_index, j, matrice2)
         print()
-        # [1, 2, 4, 4, 5]
     else:
-        print("Nessun elemento adiacente nella riga: ", i, "\n")
+        print("Nessun elemento adiacente nella colonna: ", j, "\n")
