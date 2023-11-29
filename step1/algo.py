@@ -11,8 +11,8 @@ matrice2 = [
     [0, 1, 3, 4, 5],
     [4, 3, 2, 1, 4],
     [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 1],
-    [1, 2, 2, 4, 5],
+    [2, 2, 3, 1, 1],
+    [1, 2, 2, 4, 4],
     [1, 2, 4, 4, 5]
 ]
 
@@ -27,6 +27,41 @@ def check_adj_row(l):
             if l[i] == l[i+1]:
                 return i
 
+# controlla che il range sia valido
+
+
+def valid_bound(i, j):
+    if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
+        return True
+    print("(((Elemento out of bounds)))")
+    return False
+
+# da eliminare i return true con gli indici dell'elemento da tradurr
+
+
+def check_feasibility(i, j, matrice):
+    el1 = matrice[i][j]
+    el2 = matrice[i][j+1]
+    # controllo elementi di sinistra:
+    if (valid_bound(i-1, j-1) and (matrice[i-1][j-1] == el1)):
+        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso sud")
+        return True
+    elif (valid_bound(i+1, j-1) and (matrice[i-1][j-1] == el1)):
+        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso nord")
+        return True
+    # controllo elementi di destra:
+    elif (valid_bound(i-1, j+2) and (matrice[i-1][j+2] == el2)):
+        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j+2}] verso sud")
+        return True
+    elif (valid_bound(i+1, j+2) and (matrice[i+1][j+2] == el2)):
+        print(f">>OUTPUT>> Mossa ->   Sposta M[{i+1}][{j+2}] verso nord")
+        return True
+
+    # nessuna possibile mossa trovata
+    print(
+        f">>OUTPUT>> Nessuna mossa valida trova per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
+    return False
+
 
 r = 0
 c = 0
@@ -35,6 +70,9 @@ for i in range(6):  # controllo per righe
     if c != -1:  # condizione di adiacenza
         print("Trovati due elementi simili nella riga ", i)
         print("Indici = [", c, ",", c+1, "] -> ",
-              matrice[i][c], " ", matrice[i][c+1])
+              matrice2[i][c], " ", matrice2[i][c+1], "\tinizio controllo feasibility")
+        check_feasibility(i, c, matrice2)
+        print()
+        # [1, 2, 4, 4, 5]
     else:
         print("Nessun elemento adiacente nella riga: ", i, "\n")
