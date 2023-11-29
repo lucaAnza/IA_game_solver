@@ -31,14 +31,26 @@ num_colonne = 5
 #Struttura dati che tiene i dati di check ( Green , Red )
 defalt_pixel = { 
     'hat' : (42,44) ,
-    'iced_hat' : (0,0) ,
+    'iced_hat' : (56,62) ,
     'skate' : (30,35) ,
-    'iced_skate' : (0,0) ,
+    'iced_skate' : (39,42) ,
     'pizza' : (27,25) ,
     'iced_pizza' : (0,0) ,
-    'can' : (0,0) ,
+    'can' : (39,28) ,
     'iced_can' : (0,0) ,
-    'star' : (0,0) }
+    'star' : (22,22) }
+
+default_name = {
+    'hat' : 1 ,
+    'iced_hat' : 2 ,
+    'skate' : 3 ,
+    'iced_skate' : 4 ,
+    'pizza' : 5 ,
+    'iced_pizza' : 6 ,
+    'can' : 7 ,
+    'iced_can' : 8 ,
+    'star' : 9 
+}
 
 
 
@@ -51,38 +63,46 @@ class item:
         self.red = red
         self.sum = green+red
     
-    def getItemType(self):
+    def getItemType(self , debug = False):
         
         #Hat
-        if self.__isInIntervall('hat'):
-           return 'cappello'
-        #Skate
-        elif self.__isInIntervall('skate'):
-           return 'skate'
-        #Pizza
-        elif self.__isInIntervall('pizza'):
-           return 'pizza'
-        elif self.__isInIntervall('pizza'):
-           return 'cappello'
-        elif self.__isInIntervall('pizza'):
-           return 'cappello'
-        elif self.__isInIntervall('pizza'):
-           return 'cappello'
-        elif self.__isInIntervall('pizza'):
-           return 'cappello'
-        else:
-            return 'Recognised = NULL'
+        for incertezza in range (2,4) : 
+            if self.__isInIntervall('hat',incertezza,debug):
+                return "hat"
+            elif self.__isInIntervall('skate',incertezza,debug):
+                return "skate"
+            elif self.__isInIntervall('pizza',incertezza,debug):
+                return "pizza"
+            elif self.__isInIntervall('can',incertezza,debug):
+                return "can"
+            elif self.__isInIntervall('star',incertezza,debug):
+                return "star"
+            elif self.__isInIntervall('iced_hat',incertezza,debug):
+                return "iced_hat"
+            elif self.__isInIntervall('iced_skate',incertezza,debug):
+                return "iced_skate"
+            elif self.__isInIntervall('iced_pizza',incertezza,debug):
+                return "iced_pizza"
+            elif self.__isInIntervall('iced_can',incertezza,debug):
+                return "iced_can"
+            
+        return "Unknown Item"
+        
         
     
-    def __isInIntervall(self  , type , debug = False):
+    def __isInIntervall(self  , type , incertezza ,debug = False):
         default_green = defalt_pixel[type][0]
         default_red = defalt_pixel[type][1]
         default_sum = default_green + default_red
-        incertezza = 2
+        valutation = (  (abs(self.sum-default_sum) <= incertezza*2 ) and
+                 (  (abs(self.green-default_green) <= incertezza) and (abs(self.red-default_red) <= incertezza) ) )
         if(debug):
-            print(f"-------\nIncertezza : {incertezza}\nSum : {self.sum}\nDefault_sum = {default_sum}\n---------")
-        return   (  (abs(self.sum-default_sum) < incertezza*2 ) and
-                 (  (abs(self.green-default_green) < incertezza) and (abs(self.red-default_red) < incertezza) ) )
+            print(f"Type : {type}--------------")
+            print(f"Incertezza : {incertezza}\nSum : {self.sum}\nDefault_sum = {default_sum}\nGreen/Default : {self.green}/{default_green}\nRed/Default : {self.red}/{default_red}" )
+        """return   (  (abs(self.sum-default_sum) < incertezza*2 ) and
+                 (  (abs(self.green-default_green) < incertezza) and (abs(self.red-default_red) < incertezza) ) )"""
+            
+        return valutation
             
 
     
@@ -114,7 +134,7 @@ def avg_channel(array , channel_type = 'R'):
 
 
 #Data un immagine restituisce alcune informazioni sull'immagine
-def analizza_immagine(immagine):
+def analizza_immagine(immagine , debug = False):
     
 
     # Esempio di operazioni di analisi dei dati dell'immagine
@@ -137,15 +157,22 @@ def analizza_immagine(immagine):
     red = int(avg_channel(arr , "R"))
     output_analysis = item(green , red)
 
-    # Stampa i risultati
-    print("\n")
-    print(f"Altezza: {altezza} pixel")
-    print(f"Larghezza: {larghezza} pixel")
-    print(f"Numero di pixel: {numero_pixel}")
-    print(output_analysis.getItemType())
-    print(f'Green : {green}')
-    print(f'Red : {red}')
-    print("\n")
+    #Debug
+    if(debug) : 
+        print("\n")
+        print(f"Altezza: {altezza} pixel")
+        print(f"Larghezza: {larghezza} pixel")
+        print(f"Numero di pixel: {numero_pixel}")
+        print("-----------------------------------")
+        print(output_analysis.getItemType(debug=True))
+        time.sleep(1)
+        print("-----------------------------------")
+        print(f'Green : {green}')
+        print(f'Red : {red}')
+        print("\n")
+    else:
+        print(output_analysis.getItemType())
+        
 
 
     
@@ -195,7 +222,7 @@ def matrix_from_img(img):
         for j in range(num_colonne):
             cv2.imshow(f"Immagine {cont}",
                     matrice_immagini[i][j])
-            cv2.waitKey(200)
+            cv2.waitKey(50)
             cont += 1
     cv2.destroyAllWindows()
 
@@ -224,7 +251,7 @@ matrix = matrix_from_img(immagine)
 
 for i in range(num_righe):
     for j in range(num_colonne):
-        analizza_immagine(matrix[i][j])
+        analizza_immagine(matrix[i][j] , True)
 
     
 """

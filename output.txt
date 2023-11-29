@@ -1,0 +1,1050 @@
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 90
+Default_sum = 86
+Green/Default : 44/42
+Red/Default : 46/44
+cappello
+-----------------------------------
+Green : 44
+Red : 46
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 39/42
+Red/Default : 28/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 39/30
+Red/Default : 28/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 28/25
+Recognised = NULL
+-----------------------------------
+Green : 39
+Red : 28
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 89
+Default_sum = 86
+Green/Default : 44/42
+Red/Default : 45/44
+cappello
+-----------------------------------
+Green : 44
+Red : 45
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 31/42
+Red/Default : 36/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 31/30
+Red/Default : 36/35
+skate
+-----------------------------------
+Green : 31
+Red : 36
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 31/42
+Red/Default : 36/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 31/30
+Red/Default : 36/35
+skate
+-----------------------------------
+Green : 31
+Red : 36
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 86
+Green/Default : 22/42
+Red/Default : 22/44
+Type : skate--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 65
+Green/Default : 22/30
+Red/Default : 22/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 52
+Green/Default : 22/27
+Red/Default : 22/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 52
+Green/Default : 22/27
+Red/Default : 22/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 52
+Green/Default : 22/27
+Red/Default : 22/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 52
+Green/Default : 22/27
+Red/Default : 22/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 44
+Default_sum = 52
+Green/Default : 22/27
+Red/Default : 22/25
+Recognised = NULL
+-----------------------------------
+Green : 22
+Red : 22
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 86
+Green/Default : 56/42
+Red/Default : 62/44
+Type : skate--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 65
+Green/Default : 56/30
+Red/Default : 62/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Recognised = NULL
+-----------------------------------
+Green : 56
+Red : 62
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 87
+Default_sum = 86
+Green/Default : 43/42
+Red/Default : 44/44
+cappello
+-----------------------------------
+Green : 43
+Red : 44
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 86
+Green/Default : 39/42
+Red/Default : 42/44
+Type : skate--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 65
+Green/Default : 39/30
+Red/Default : 42/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 42/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 42/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 42/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 42/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 81
+Default_sum = 52
+Green/Default : 39/27
+Red/Default : 42/25
+Recognised = NULL
+-----------------------------------
+Green : 39
+Red : 42
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 86
+Green/Default : 40/42
+Red/Default : 28/44
+Type : skate--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 65
+Green/Default : 40/30
+Red/Default : 28/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 52
+Green/Default : 40/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 52
+Green/Default : 40/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 52
+Green/Default : 40/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 52
+Green/Default : 40/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 68
+Default_sum = 52
+Green/Default : 40/27
+Red/Default : 28/25
+Recognised = NULL
+-----------------------------------
+Green : 40
+Red : 28
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 86
+Green/Default : 38/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 65
+Green/Default : 38/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 26/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 26/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 26/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 26/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 64
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 26/25
+Recognised = NULL
+-----------------------------------
+Green : 38
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 88
+Default_sum = 86
+Green/Default : 44/42
+Red/Default : 44/44
+cappello
+-----------------------------------
+Green : 44
+Red : 44
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 31/42
+Red/Default : 36/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 31/30
+Red/Default : 36/35
+skate
+-----------------------------------
+Green : 31
+Red : 36
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 86
+Green/Default : 56/42
+Red/Default : 62/44
+Type : skate--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 65
+Green/Default : 56/30
+Red/Default : 62/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 118
+Default_sum = 52
+Green/Default : 56/27
+Red/Default : 62/25
+Recognised = NULL
+-----------------------------------
+Green : 56
+Red : 62
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 87
+Default_sum = 86
+Green/Default : 43/42
+Red/Default : 44/44
+cappello
+-----------------------------------
+Green : 43
+Red : 44
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 86
+Green/Default : 38/42
+Red/Default : 27/44
+Type : skate--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 65
+Green/Default : 38/30
+Red/Default : 27/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 27/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 27/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 27/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 27/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 27/25
+Recognised = NULL
+-----------------------------------
+Green : 38
+Red : 27
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 86
+Green/Default : 38/42
+Red/Default : 28/44
+Type : skate--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 65
+Green/Default : 38/30
+Red/Default : 28/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 28/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 66
+Default_sum = 52
+Green/Default : 38/27
+Red/Default : 28/25
+Recognised = NULL
+-----------------------------------
+Green : 38
+Red : 28
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 25/44
+Type : skate--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 25/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 25/25
+pizza
+-----------------------------------
+Green : 28
+Red : 25
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 31/42
+Red/Default : 36/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 31/30
+Red/Default : 36/35
+skate
+-----------------------------------
+Green : 31
+Red : 36
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 25/44
+Type : skate--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 25/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 25/25
+pizza
+-----------------------------------
+Green : 28
+Red : 25
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 86
+Green/Default : 31/42
+Red/Default : 36/44
+Type : skate--------------
+Incertezza : 2
+Sum : 67
+Default_sum = 65
+Green/Default : 31/30
+Red/Default : 36/35
+skate
+-----------------------------------
+Green : 31
+Red : 36
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 25/44
+Type : skate--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 25/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 25/25
+pizza
+-----------------------------------
+Green : 28
+Red : 25
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 25/44
+Type : skate--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 25/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 53
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 25/25
+pizza
+-----------------------------------
+Green : 28
+Red : 25
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 86
+Green/Default : 36/42
+Red/Default : 29/44
+Type : skate--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 65
+Green/Default : 36/30
+Red/Default : 29/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 36/27
+Red/Default : 29/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 36/27
+Red/Default : 29/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 36/27
+Red/Default : 29/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 36/27
+Red/Default : 29/25
+Type : pizza--------------
+Incertezza : 2
+Sum : 65
+Default_sum = 52
+Green/Default : 36/27
+Red/Default : 29/25
+Recognised = NULL
+-----------------------------------
+Green : 36
+Red : 29
+
+
+
+
+Altezza: 78 pixel
+Larghezza: 78 pixel
+Numero di pixel: 6084
+-----------------------------------
+Type : hat--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 86
+Green/Default : 28/42
+Red/Default : 26/44
+Type : skate--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 65
+Green/Default : 28/30
+Red/Default : 26/35
+Type : pizza--------------
+Incertezza : 2
+Sum : 54
+Default_sum = 52
+Green/Default : 28/27
+Red/Default : 26/25
+pizza
+-----------------------------------
+Green : 28
+Red : 26
+
+
