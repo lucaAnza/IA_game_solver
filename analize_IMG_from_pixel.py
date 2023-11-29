@@ -35,9 +35,9 @@ defalt_pixel = {
     'skate' : (30,35) ,
     'iced_skate' : (39,42) ,
     'pizza' : (27,25) ,
-    'iced_pizza' : (0,0) ,
+    'iced_pizza' : (26,49) ,
     'can' : (39,28) ,
-    'iced_can' : (0,0) ,
+    'iced_can' : (35,56) ,
     'star' : (22,22) }
 
 default_name = {
@@ -148,7 +148,7 @@ def analizza_immagine(immagine , debug = False):
     
     #Crea un array di pixel ( ogni pixel è un array di 3 )
     arr = []
-    for i in range(larghezza):
+    for i in range(altezza):
         for j in range(larghezza):
             arr.append(immagine[i,j])
 
@@ -179,7 +179,7 @@ def analizza_immagine(immagine , debug = False):
 
 
 # Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
-def matrix_from_img(img):
+def matrix_from_img(img, delay = 200 , open_img = False):
     # Dimnensione immagine
     altezza_immagine, larghezza_immagine, _ = img.shape
 
@@ -217,14 +217,15 @@ def matrix_from_img(img):
             # cv2.waitKey(2000)
             matrice_immagini[riga].append(cell_img)
 
-    cont = 1
-    for i in range(num_righe):
-        for j in range(num_colonne):
-            cv2.imshow(f"Immagine {cont}",
-                    matrice_immagini[i][j])
-            cv2.waitKey(50)
-            cont += 1
-    cv2.destroyAllWindows()
+    if ( open_img ):
+        cont = 1
+        for i in range(num_righe):
+            for j in range(num_colonne):
+                cv2.imshow(f"Immagine {cont}",
+                        matrice_immagini[i][j])
+                cv2.waitKey(delay)
+                cont += 1
+        cv2.destroyAllWindows()
 
     return matrice_immagini
 
@@ -238,7 +239,7 @@ def matrix_from_img(img):
 
 
 
-nome_file_immagine = "Screen.png"
+nome_file_immagine = "Screen_explosion.png"
 # Carica l'immagine
 immagine = cv2.imread(nome_file_immagine)
 
@@ -247,11 +248,22 @@ if immagine is None:
     print("Errore nel caricamento dell'immagine.")
     sys.exit()
 
-matrix = matrix_from_img(immagine)
+x_inizio, y_inizio, larghezza, altezza = 16, 30, 394, 465
+immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
+altezza, larghezza, canali = immagine.shape
+"""
+print(f"Altezza: {altezza} pixel")
+print(f"Larghezza: {larghezza} pixel")
+cv2.imshow("img" , immagine_ritagliata)
+cv2.waitKey(5000)"""
+
+
+matrix = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
 
 for i in range(num_righe):
     for j in range(num_colonne):
-        analizza_immagine(matrix[i][j] , True)
+        analizza_immagine(matrix[i][j] , False)
+        
 
     
 """
