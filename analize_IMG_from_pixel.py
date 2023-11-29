@@ -240,7 +240,7 @@ def matrix_from_img(img, delay = 200 , open_img = False):
 
 
 
-nome_file_immagine = "Screen.png"
+nome_file_immagine = "screenshot_by_bot.png"
 # Carica l'immagine
 immagine = cv2.imread(nome_file_immagine)
 
@@ -259,7 +259,7 @@ cv2.imshow("img" , immagine_ritagliata)
 cv2.waitKey(5000)"""
 
 
-matrix_img = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+matrix_img = matrix_from_img(immagine_ritagliata , 1000 , open_img = True)
 matrix_item = [ [] , [] , [] , [] , [] , [] ]
 
 
@@ -272,7 +272,8 @@ for i in range(num_righe):
 #Print matrice
 for i in range(num_righe):
     for j in range(num_colonne):  
-        print(default_name[str(matrix_item[i][j])] , end = " ")
+        print(str(matrix_item[i][j]) , end = " ")
+        #print(default_name[str(matrix_item[i][j])] , end = " ")
     print()
 
 
