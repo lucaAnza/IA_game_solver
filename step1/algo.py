@@ -24,12 +24,112 @@ def mangio():
     pass
 
 
-dict_movimenti = {
-    'ciao': mangio()
+dizionario_movimenti = {
+    # R0
+    'M[0][0] basso': 'a',
+    'M[0][0] dx': 'b',
+    'M[0][1] sx': 'c',
+    'M[0][1] basso': 'd',
+    'M[0][1] dx': 'e',
+    'M[0][2] sx': 'f',
+    'M[0][2] basso': 'g',
+    'M[0][2] dx': 'h',
+    'M[0][3] sx': 'i',
+    'M[0][3] basso': 'j',
+    'M[0][3] dx': 'k',
+    'M[0][4] dx': 'l',
+    'M[0][4] basso': 'm',
+    # R1
+    'M[1][0] basso': '',
+    'M[1][0] dx': '',
+    'M[1][0] alto': '',
+    'M[1][1] sx': '',
+    'M[1][1] basso': '',
+    'M[1][1] dx': '',
+    'M[1][1] alto': '',
+    'M[1][2] sx': '',
+    'M[1][2] basso': '',
+    'M[1][2] dx': '',
+    'M[1][2] alto': '',
+    'M[1][3] sx': '',
+    'M[1][3] basso': '',
+    'M[1][3] dx': '',
+    'M[1][3] alto': '',
+    'M[1][4] sx': '',
+    'M[1][4] basso': '',
+    'M[1][4] alto': '',
+    # R2
+    'M[2][0] basso': '',
+    'M[2][0] dx': '',
+    'M[2][0] alto': '',
+    'M[2][1] sx': '',
+    'M[2][1] basso': '',
+    'M[2][1] dx': '',
+    'M[2][1] alto': '',
+    'M[2][2] sx': '',
+    'M[2][2] basso': '',
+    'M[2][2] dx': '',
+    'M[2][2] alto': '',
+    'M[2][3] sx': '',
+    'M[2][3] basso': '',
+    'M[2][3] dx': '',
+    'M[2][3] alto': '',
+    'M[2][4] sx': '',
+    'M[2][4] basso': '',
+    'M[2][4] alto': '',
+    # R3
+    'M[3][0] basso': '',
+    'M[3][0] dx': '',
+    'M[3][0] alto': '',
+    'M[3][1] sx': '',
+    'M[3][1] basso': '',
+    'M[3][1] dx': '',
+    'M[3][1] alto': '',
+    'M[3][2] sx': '',
+    'M[3][2] basso': '',
+    'M[3][2] dx': '',
+    'M[3][2] alto': '',
+    'M[3][3] sx': '',
+    'M[3][3] basso': '',
+    'M[3][3] dx': '',
+    'M[3][3] alto': '',
+    'M[3][4] sx': '',
+    'M[3][4] basso': '',
+    'M[3][4] alto': '',
 
-
-
-
+    # R4
+    'M[4][0] basso': '',
+    'M[4][0] dx': '',
+    'M[4][0] alto': '',
+    'M[4][1] sx': '',
+    'M[4][1] basso': '',
+    'M[4][1] dx': '',
+    'M[4][1] alto': '',
+    'M[4][2] sx': '',
+    'M[4][2] basso': '',
+    'M[4][2] dx': '',
+    'M[4][2] alto': '',
+    'M[4][3] sx': '',
+    'M[4][3] basso': '',
+    'M[4][3] dx': '',
+    'M[4][3] alto': '',
+    'M[4][4] sx': '',
+    'M[4][4] basso': '',
+    'M[4][4] alto': '',
+    # R5
+    'M[5][0] dx': '',
+    'M[5][0] alto': '',
+    'M[5][1] sx': '',
+    'M[5][1] dx': '',
+    'M[5][1] alto': '',
+    'M[5][2] sx': '',
+    'M[5][2] dx': '',
+    'M[5][2] alto': '',
+    'M[5][3] sx': '',
+    'M[5][3] dx': '',
+    'M[5][3] alto': '',
+    'M[5][4] sx': '',
+    'M[5][4] alto': '',
 }
 
 
@@ -95,7 +195,7 @@ def check_row_feasibility(i, j, matrice):
     elif (valid_bound(i+1, j-1) and (matrice[i-1][j-1] == el1)):
         print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso nord")
         return True
-    # controllo elementi di destra:
+    # controllo elementi di dx:
     elif (valid_bound(i-1, j+2) and (matrice[i-1][j+2] == el2)):
         print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j+2}] verso sud")
         return True

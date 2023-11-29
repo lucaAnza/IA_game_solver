@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Carico immagine e controllo per debug
-img = cv2.imread("Screen.png")
+img = cv2.imread("Screen_bot_ritagliato.png")
 
 
 # Dimnensione immagine
