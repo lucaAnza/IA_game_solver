@@ -93,11 +93,7 @@ def check_row_feasibility(i, j, matrice):
     return False
 
 
-r = 0
-c = 0
-
-
-def controllo_righe():
+def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
         if c != -1:  # condizione di adiacenza
@@ -110,14 +106,16 @@ def controllo_righe():
         else:
             print("Nessun elemento adiacente nella riga: ", i, "\n")
 
+    for j in range(5):  # controllo per colonne
+        riga_index = check_adj_column(matrice2, j)
+        if riga_index != -1:  # condizione di adiacenza
+            print("Trovati due elementi simili nella colonna ", j)
+            print(
+                f"Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]}")
+            check_column_feasibility(riga_index, j, matrice2)
+            print()
+        else:
+            print("Nessun elemento adiacente nella colonna: ", j, "\n")
 
-for j in range(5):  # controllo per colonne
-    riga_index = check_adj_column(matrice2, j)
-    if riga_index != -1:  # condizione di adiacenza
-        print("Trovati due elementi simili nella colonna ", j)
-        print(
-            f"Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]}")
-        check_column_feasibility(riga_index, j, matrice2)
-        print()
-    else:
-        print("Nessun elemento adiacente nella colonna: ", j, "\n")
+
+scan_matrice(matrice)
