@@ -1,3 +1,6 @@
+import pyautogui
+import time
+
 matrice = [
     [1, 2, 3, 3, 5],
     [2, 3, 1, 5, 5],
@@ -15,6 +18,19 @@ matrice2 = [
     [1, 2, 2, 4, 4],
     [1, 2, 4, 4, 5]
 ]
+
+
+def mangio():
+    pass
+
+
+dict_movimenti = {
+    'ciao': mangio()
+
+
+
+
+}
 
 
 def check_adj_row(l):
