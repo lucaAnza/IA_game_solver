@@ -42,16 +42,15 @@ defalt_pixel = {
 
 default_name = {
     'hat' : 1 ,
-    'iced_hat' : 2 ,
-    'skate' : 3 ,
-    'iced_skate' : 4 ,
-    'pizza' : 5 ,
-    'iced_pizza' : 6 ,
-    'can' : 7 ,
-    'iced_can' : 8 ,
-    'star' : 9 
+    'iced_hat' : 1 ,
+    'skate' : 2 ,
+    'iced_skate' : 2 ,
+    'pizza' : 3 ,
+    'iced_pizza' : 3 ,
+    'can' : 4 ,
+    'iced_can' : 4 ,
+    'star' : 5 
 }
-
 
 
 
@@ -172,6 +171,8 @@ def analizza_immagine(immagine , debug = False):
         print("\n")
     else:
         print(output_analysis.getItemType())
+
+    return(output_analysis.getItemType())
         
 
 
@@ -239,7 +240,7 @@ def matrix_from_img(img, delay = 200 , open_img = False):
 
 
 
-nome_file_immagine = "Screen_explosion.png"
+nome_file_immagine = "Screen.png"
 # Carica l'immagine
 immagine = cv2.imread(nome_file_immagine)
 
@@ -258,12 +259,22 @@ cv2.imshow("img" , immagine_ritagliata)
 cv2.waitKey(5000)"""
 
 
-matrix = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+matrix_img = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+matrix_item = [ [] , [] , [] , [] , [] , [] ]
+
 
 for i in range(num_righe):
     for j in range(num_colonne):
-        analizza_immagine(matrix[i][j] , False)
-        
+        res = analizza_immagine(matrix_img[i][j] , False)
+        matrix_item[i].append(res)
+
+
+#Print matrice
+for i in range(num_righe):
+    for j in range(num_colonne):  
+        print(default_name[str(matrix_item[i][j])] , end = " ")
+    print()
+
 
     
 """
