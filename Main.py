@@ -96,7 +96,16 @@ class item:
         return valutation
             
 
-    
+#Funzione che esegue uno screenshot
+def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False , name_script = "Main.py"):
+
+    screenshot = pyautogui.screenshot(region=(x, y, width, height))
+    current_directory = os.path.abspath(__file__)
+    name_script = "Main.py"
+    file_path = str(current_directory[:-len(name_script)].replace('\\' , '/')) + str(f"screenshot{label}.png")     # 9 rappresenta la lunghezza del nome dello script -> screen.py
+    screenshot.save(file_path)
+    if(debug):
+        print(f"Screenshot salvato in: {file_path}")
 
 
 #Dato l'array dei pixel, scarta i pixel di sfondo e fa una media degli altri
@@ -242,45 +251,9 @@ def checkMatrix(matrix):
         return True
  
     
-
 #MAIN
 
-nome_file_immagine = "Screen_bot.png"
-immagine = cv2.imread(nome_file_immagine)
 
-# Verifica che l'immagine sia stata caricata correttamente
-if immagine is None:
-    print("Errore nel caricamento dell'immagine.")
-    sys.exit()
-
-x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
-immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
-altezza, larghezza, canali = immagine.shape
-
-
-#cv2.imshow("img" , immagine_ritagliata)
-#cv2.waitKey(5000)
-
-
-matrix_img = matrix_from_img(immagine_ritagliata , 500 , open_img = False)
-matrix_item = [ [] , [] , [] , [] , [] , [] ]
-matrix_number = [ [] , [] , [] , [] , [] , [] ]
-
-for i in range(num_righe):
-    for j in range(num_colonne):
-        res = analizza_immagine(matrix_img[i][j] , debug=False)
-        matrix_item[i].append(res)
-        matrix_number[i].append(default_name[str(res)])
-
-
-print_matrix(matrix_item)
-
-
-    
-
-
-
-"""
 #Script finale
 attesa = 10
 for i in range(attesa):
@@ -291,12 +264,15 @@ consecutive_error = 0
 while(consecutive_error < 100):
     #Cattura screenshot
     label = 'kz32'
-    #take_screenshot(870,330,490,620, label)
+    take_screenshot(870,330,490,620, label , name_script='Main.py')
     img_name = f"screenshot{label}.png"
     immagine = cv2.imread(img_name)
     if immagine is None:
         print("Errore nel caricamento dell'immagine.")
         sys.exit()
+    #Ritaglio immagine, per adattarla al secondo taglio
+    x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+    immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
     
     #Crea la matrice di item e numeri
     matrix_img = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
@@ -315,4 +291,4 @@ while(consecutive_error < 100):
         # -> Clicca il pulsante
     else:
         consecutive_error+=1
-"""
+
