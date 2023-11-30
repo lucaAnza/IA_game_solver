@@ -19,6 +19,8 @@ sfondo_B = (180,230)
 # Dimensione matrice
 num_righe = 6
 num_colonne = 5
+offset = 100
+delay_key = 0.3
 
 
 
@@ -365,9 +367,11 @@ def send_input_gui(string):
     if c2 != '':  # se si usa CTRL o ALT come opzione
         print(f'{Fore.GREEN} Pressed key = {c1} + {c2} {Style.RESET_ALL}')
         pyautogui.hotkey(c1, c2)
+        time.sleep(float(delay_key))
     else:
         print(f'{Fore.GREEN} Pressed key = {c1} {Style.RESET_ALL}')
         pyautogui.press(c1)
+        time.sleep(float(delay_key))
 
 
 def check_adj_row(l):
@@ -376,6 +380,8 @@ def check_adj_row(l):
             f'check index {i} -> is M[{i}]-> {l[i]} == M[{i+1}]-> {l[i+1]}')'''
         if (i == 4):
             return -1
+        elif l[i] == 5:  # stella
+            return i+offset
         else:
             if l[i] == l[i+1]:
                 return i
@@ -404,6 +410,7 @@ def valid_col_bound(i):
         return True
     print(f"{Fore.RED}(((Elemento out of bounds))){Style.RESET_ALL}")
     return False
+
 
 
 def check_column_feasibility(i, j, matrice):
@@ -472,9 +479,14 @@ def check_row_feasibility(i, j, matrice):
 def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
-        if c != -1:  # condizione di adiacenza
+        if c >= 100:   # condizione 
+            c = c-100
+            send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
+            break
+        elif c != -1:  # condizione di adiacenza
             print(
                 f"{Fore.GREEN}Trovati due elementi simili nella riga {i} {Style.RESET_ALL}")
+            print(f'c = {c}')
             print(f"Indici = [", c, ",", c+1, "] -> ",
                   matrice2[i][c], " ", matrice2[i][c+1], f"\t{Fore.GREEN}inizio controllo feasibility{Style.RESET_ALL}")
             move = check_row_feasibility(i, c, matrice2)
@@ -532,7 +544,7 @@ time.sleep(2)
 
 consecutive_error = 0
 while(consecutive_error < 100):
-    time.sleep(1)
+    time.sleep(0.1)
     #Cattura screenshot
     label = 'kz32'
     take_screenshot(870,330,490,620, label , name_script='Main.py')
