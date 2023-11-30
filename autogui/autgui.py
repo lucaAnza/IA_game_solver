@@ -1,9 +1,17 @@
 import pyautogui
 import time
 
-time.sleep(2)
-# pyautogui.hotkey("command", "v", interval=0.25)
-S = 'command+m'
-c1, c2 = S.split('+')
-pyautogui.hotkey(c1, c2, interval=0.25)
-print()
+# time.sleep(2)
+
+string = 'a+'
+
+c1, c2 = string.split('+')
+
+
+if c2 != '':
+    print("Comando composto")
+else:
+    print("Single comand")
+
+'''print(f"c1 -> {c1}")
+print(f"c2 -> {c2}")'''

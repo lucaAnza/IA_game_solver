@@ -20,10 +20,6 @@ matrice2 = [
 ]
 
 
-def mangio():
-    pass
-
-
 dizionario_movimenti = {
     # R0
     'M[0][0] basso': 'a',
@@ -133,6 +129,14 @@ dizionario_movimenti = {
 }
 
 
+def send_input_gui(string):
+    c1, c2 = string.split('+')
+    if c2 != '':  # se si usa CTRL o ALT come opzione
+        pyautogui.hotkey(c1, c2)
+    else:
+        pyautogui.press(c1)
+
+
 def check_adj_row(l):
     for i in range(len(l)):  # range 0-4
         '''print(
@@ -192,8 +196,8 @@ def check_row_feasibility(i, j, matrice):
     if (valid_bound(i-1, j-1) and (matrice[i-1][j-1] == el1)):
         print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso sud")
         return True
-    elif (valid_bound(i+1, j-1) and (matrice[i-1][j-1] == el1)):
-        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso nord")
+    elif (valid_bound(i+1, j-1) and (matrice[i+1][j-1] == el1)):
+        print(f">>OUTPUT>> Mossa ->   Sposta M[{i+1}][{j-1}] verso nord")
         return True
     # controllo elementi di dx:
     elif (valid_bound(i-1, j+2) and (matrice[i-1][j+2] == el2)):

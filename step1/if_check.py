@@ -9,6 +9,5 @@ def valid_bound(i, j):
 i = 2
 j = 5
 
-
 if valid_bound(i, j):
     print("ERRORE")
