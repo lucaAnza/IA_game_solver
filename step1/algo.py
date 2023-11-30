@@ -157,7 +157,7 @@ def check_adj_column(M, j):
                 return i
 
 
-# controlla che il range sia valido per controllo orizzontale
+# controlla che il range sia valido per controllo orizzontale (e verticale outofline)
 def valid_bound(i, j):
     if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
         return True
@@ -176,12 +176,27 @@ def valid_col_bound(i):
 def check_column_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i+1][j]
-    if ((valid_col_bound(i+3)) and (matrice[i+3][j] == el2)):
-        print(f">>OUTPUT>> Mossa -> Sposta M[{i+3}][{j}] verso nord")
-        return True
+
+    # controllo sinistra
+    if ((valid_bound(i-1, j-1)) and (matrice[i-1][j-1] == el1)):
+        return (f"M[{i-1}][{j-1}] dx")
+
+    elif ((valid_bound(i+2, j-1)) and (matrice[i+2][j-1] == el2)):
+        return (f"M[{i+2}][{j-1}] dx")
+
+    # controllo destra
+    elif (valid_bound(i-1, j+1) and (matrice[i-1][j+1] == el1)):
+        return (f"M[{i-1}][{j+1}] sx")
+
+    elif (valid_bound(i+2, j+1) and (matrice[i+2][j+1] == el2)):
+        return (f"M[{i+2}][{j+1}] sx")
+
+    # Controllo in line alto - basso
+    elif ((valid_col_bound(i+3)) and (matrice[i+3][j] == el2)):
+        return (f"M[{i+3}][{j}] alto")
+
     elif ((valid_col_bound(i-2)) and (matrice[i-2][j] == el1)):
-        print(f">>OUTPUT>> Mossa -> Sposta M[{i-2}][{j}] verso sud")
-        return True
+        return (f"M[{i-2}][{j}] basso")
 
     # nessuna possibile mossa trovata
     print(
@@ -192,20 +207,26 @@ def check_column_feasibility(i, j, matrice):
 def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i][j+1]
+    # controllo inline dx e sx:
+    if (valid_bound(i, j-2) and (matrice[i][j-2] == el1)):
+        return (f"M[{i}][{j-2}] dx")
+
+    elif (valid_bound(i, j+2) and (matrice[i][j+2] == el2)):
+        return (f"M[{i}][{j+2}] sx")
+
     # controllo elementi di sinistra:
-    if (valid_bound(i-1, j-1) and (matrice[i-1][j-1] == el1)):
-        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j-1}] verso sud")
-        return True
+    elif (valid_bound(i-1, j-1) and (matrice[i-1][j-1] == el1)):
+        print(f"M[{i-1}][{j-1}] basso")
+
     elif (valid_bound(i+1, j-1) and (matrice[i+1][j-1] == el1)):
-        print(f">>OUTPUT>> Mossa ->   Sposta M[{i+1}][{j-1}] verso nord")
-        return True
+        return (f"M[{i+1}][{j-1}] alto")
+
     # controllo elementi di dx:
     elif (valid_bound(i-1, j+2) and (matrice[i-1][j+2] == el2)):
-        print(f">>OUTPUT>> Mossa ->   Sposta M[{i-1}][{j+2}] verso sud")
-        return True
+        return (f"M[{i-1}][{j+2}] basso")
+
     elif (valid_bound(i+1, j+2) and (matrice[i+1][j+2] == el2)):
-        print(f">>OUTPUT>> Mossa ->   Sposta M[{i+1}][{j+2}] verso nord")
-        return True
+        return (f"M[{i+1}][{j+2}] alto")
 
     # nessuna possibile mossa trovata
     print(
