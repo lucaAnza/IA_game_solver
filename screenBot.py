@@ -25,24 +25,16 @@ cv2.destroyAllWindows()"""
 
 
 
-def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = ""):
-    # Ottieni le dimensioni dello schermo
-    #width, height = pyautogui.size()
+def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False):
 
+    label = "cane"
     screenshot = pyautogui.screenshot(region=(x, y, width, height))
-
-    # Specifica il percorso e il nome del file per salvare lo screenshot
-    #timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     current_directory = os.path.abspath(__file__)
-    file_path = str(current_directory[:-9].replace('\\' , '/')) + str(f"screenshot{label}.png")     # 9 rappresenta la lunghezza del nome dello script -> screen.py
-
-
-    # Salva lo screenshot
+    script_name = "Main.py"
+    file_path = str(current_directory[:len(script_name)].replace('\\' , '/')) + str(f"screenshot{label}.png")     # 9 rappresenta la lunghezza del nome dello script -> screen.py
     screenshot.save(file_path)
-
-    
-    
-    print(f"Screenshot salvato in: {file_path}")
+    if(debug):
+        print(f"Screenshot salvato in: {file_path}")
 
 #Funzione che salva tante immgini in modo tale da capire la più adatta
 def analysis_screenshot():

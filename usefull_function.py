@@ -21,3 +21,12 @@ while True:
         print(f"Fine sessione [ tasto premuto = {chr(key)} ] ")
         break
 cv2.destroyAllWindows()"""
+
+
+#USEFULL SCREEN
+
+# Ottieni le dimensioni dello schermo
+    #width, height = pyautogui.size()
+
+    # Specifica il percorso e il nome del file per salvare lo screenshot
+    #timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")

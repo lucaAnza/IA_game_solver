@@ -2,18 +2,9 @@ import cv2
 import numpy as np
 import sys
 import time
-
-# Ricorda per chiudere il processo : kill -9 $(pgrep -n "python")
-
-
-# DATI
-
-# Immagine[i,j] ritorna un array di 3  ( B , G , R)
-# Lo sfondo sta in un range di R = {237,250}   G = {208,211}   B = {210,216}
-
-"""sfondo_R = (237,250)
-sfondo_G = (208,211)
-sfondo_B = (210,216)"""
+import pyautogui
+import datetime
+import os
 
 
 #GLOBALS
