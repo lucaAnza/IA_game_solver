@@ -106,26 +106,26 @@ dizionario_movimenti = {
     'M[4][2] dx': 'alt+g',
     'M[4][2] alto': 'alt+h',
     'M[4][3] sx': 'alt+i',
-    'M[4][3] basso': 'alt+l',
-    'M[4][3] dx': 'alt+m',
-    'M[4][3] alto': 'alt+n',
-    'M[4][4] sx': 'alt+o',
-    'M[4][4] basso': 'alt+p',
-    'M[4][4] alto': 'alt+q',
+    'M[4][3] basso': 'alt+j',
+    'M[4][3] dx': 'alt+k',
+    'M[4][3] alto': 'alt+l',
+    'M[4][4] sx': 'alt+m',
+    'M[4][4] basso': 'alt+n',
+    'M[4][4] alto': 'alt+o',
     # R5
-    'M[5][0] dx': 'alt+r',
-    'M[5][0] alto': 'alt+s',
-    'M[5][1] sx': 'alt+t',
-    'M[5][1] dx': 'alt+u',
-    'M[5][1] alto': 'alt+v',
-    'M[5][2] sx': 'alt+w',
-    'M[5][2] dx': 'alt+x',
-    'M[5][2] alto': 'alt+y',
-    'M[5][3] sx': 'alt+z',
-    'M[5][3] dx': 'alt+1',
-    'M[5][3] alto': 'alt+2',
-    'M[5][4] sx': 'alt+3',
-    'M[5][4] alto': 'alt+4',
+    'M[5][0] dx': 'alt+p',
+    'M[5][0] alto': 'alt+q',
+    'M[5][1] sx': 'alt+r',
+    'M[5][1] dx': 'alt+s',
+    'M[5][1] alto': 'alt+t',
+    'M[5][2] sx': 'alt+u',
+    'M[5][2] dx': 'alt+v',
+    'M[5][2] alto': 'alt+w',
+    'M[5][3] sx': 'alt+x',
+    'M[5][3] dx': 'alt+y',
+    'M[5][3] alto': 'alt+z',
+    'M[5][4] sx': 'alt+1',
+    'M[5][4] alto': 'alt+2',
 }
 
 
@@ -201,9 +201,11 @@ def check_column_feasibility(i, j, matrice):
     # nessuna possibile mossa trovata
     print(
         f">>OUTPUT>> Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
-
+    return None
 
 # da eliminare i return true con gli indici dell'elemento da tradurre
+
+
 def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i][j+1]
