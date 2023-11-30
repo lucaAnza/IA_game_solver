@@ -30,15 +30,15 @@ num_colonne = 5
 
 #Struttura dati che tiene i dati di check ( Green , Red )
 defalt_pixel = { 
-    'hat' : (42,44) ,
-    'iced_hat' : (56,62) ,
-    'skate' : (30,35) ,
-    'iced_skate' : (39,42) ,
-    'pizza' : (27,25) ,
-    'iced_pizza' : (26,49) ,
-    'can' : (39,28) ,
-    'iced_can' : (35,56) ,
-    'star' : (22,22) }
+    'hat' : (42,41) ,
+    'iced_hat' : (47,61) ,
+    'skate' : (29,33) ,
+    'iced_skate' : (32,41) ,
+    'pizza' : (26,21) ,
+    'iced_pizza' : (25,45) ,
+    'can' : (39,18) ,
+    'iced_can' : (28,56) ,
+    'star' : (20,11) }
 
 default_name = {
     'hat' : 1 ,
@@ -49,7 +49,8 @@ default_name = {
     'iced_pizza' : 3 ,
     'can' : 4 ,
     'iced_can' : 4 ,
-    'star' : 5 
+    'star' : 5 ,
+    'Unknown_Item' : 0
 }
 
 
@@ -85,7 +86,7 @@ class item:
             elif self.__isInIntervall('iced_can',incertezza,debug):
                 return "iced_can"
             
-        return "Unknown Item"
+        return "Unknown_Item"
         
         
     
@@ -169,8 +170,6 @@ def analizza_immagine(immagine , debug = False):
         print(f'Green : {green}')
         print(f'Red : {red}')
         print("\n")
-    else:
-        print(output_analysis.getItemType())
 
     return(output_analysis.getItemType())
         
@@ -231,17 +230,31 @@ def matrix_from_img(img, delay = 200 , open_img = False):
     return matrice_immagini
 
     
+#Stampa una matrice di numrighe,numcolonne elementi
+def print_matrix(matrix):
+    
+    for i in range(num_righe):
+        for j in range(num_colonne):  
+            print(str(matrix[i][j]) , end = " ")
+        print()
 
-
+# True -> matrice senza unknown elements   False -> matrice con elementi sconosciuti
+def checkMatrix(matrix):
+    prod = 1
+    for i in range(num_righe):
+        for j in range(num_colonne):  
+            prod*=int(matrix[i][j])
+    
+    if(prod == 0):
+        return False
+    else:
+        return True
+ 
     
 
+#MAIN
 
-    
-
-
-
-nome_file_immagine = "screenshot_by_bot.png"
-# Carica l'immagine
+nome_file_immagine = "Screen_bot.png"
 immagine = cv2.imread(nome_file_immagine)
 
 # Verifica che l'immagine sia stata caricata correttamente
@@ -249,61 +262,66 @@ if immagine is None:
     print("Errore nel caricamento dell'immagine.")
     sys.exit()
 
-x_inizio, y_inizio, larghezza, altezza = 16, 30, 394, 465
+x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
 immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
 altezza, larghezza, canali = immagine.shape
-"""
-print(f"Altezza: {altezza} pixel")
-print(f"Larghezza: {larghezza} pixel")
+
+
 cv2.imshow("img" , immagine_ritagliata)
-cv2.waitKey(5000)"""
+cv2.waitKey(5000)
 
 
-matrix_img = matrix_from_img(immagine_ritagliata , 1000 , open_img = True)
+matrix_img = matrix_from_img(immagine_ritagliata , 500 , open_img = False)
 matrix_item = [ [] , [] , [] , [] , [] , [] ]
-
+matrix_number = [ [] , [] , [] , [] , [] , [] ]
 
 for i in range(num_righe):
     for j in range(num_colonne):
-        res = analizza_immagine(matrix_img[i][j] , False)
+        res = analizza_immagine(matrix_img[i][j] , debug=False)
         matrix_item[i].append(res)
+        matrix_number[i].append(default_name[str(res)])
 
 
-#Print matrice
-for i in range(num_righe):
-    for j in range(num_colonne):  
-        print(str(matrix_item[i][j]) , end = " ")
-        #print(default_name[str(matrix_item[i][j])] , end = " ")
-    print()
+print_matrix(matrix_item)
 
 
     
+
+
+
 """
-scelta = input("Immagine originale? (y/n) : ")
-#scelta = 'y'
-if(scelta == 'y' or scelta == 'yes'):
-    cv2.imshow("Immagine originale", immagine)
-    analizza_immagine(immagine)
-else:
-    # Ritaglio
-    x_inizio, y_inizio, larghezza, altezza = 15, 433, 80, 80
-    immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]  
-    cv2.imshow("Immagine ritagliata", immagine_ritagliata)
-    analizza_immagine(immagine_ritagliata)
+#Script finale
+attesa = 10
+for i in range(attesa):
+    print(f"Starting bot in {attesa-i} seconds...")
+    time.sleep(1)
 
-
-
-time.sleep(1)             # In questa fase premi invio -> Per problemi di buffering
-while True:
-    key = cv2.waitKeyEx(0)
-    if(chr(key) == 'q'):
-        print(f"Fine sessione [ tasto premuto = {chr(key)} ] ")
-        break
-cv2.destroyAllWindows()"""
-
-
-
-# Green,Red
-#SKATE 30,35
-#PIZZA 27,25
-#CAPPELLO 42,44
+consecutive_error = 0
+while(consecutive_error < 100):
+    #Cattura screenshot
+    label = 'kz32'
+    #take_screenshot(870,330,490,620, label)
+    img_name = f"screenshot{label}.png"
+    immagine = cv2.imread(img_name)
+    if immagine is None:
+        print("Errore nel caricamento dell'immagine.")
+        sys.exit()
+    
+    #Crea la matrice di item e numeri
+    matrix_img = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+    matrix_item = [ [] , [] , [] , [] , [] , [] ]
+    matrix_number = [ [] , [] , [] , [] , [] , [] ]
+    for i in range(num_righe):
+        for j in range(num_colonne):
+            res = analizza_immagine(matrix_img[i][j] , debug=False)
+            matrix_item[i].append(res)
+            matrix_number[i].append(default_name[str(res)])
+    
+    if(checkMatrix(matrix_number)):
+        consecutive_error_count=0
+        #Ritorna il pulsante da cliccare
+        #pulsante = algoritmoCri(matrix_number)
+        # -> Clicca il pulsante
+    else:
+        consecutive_error+=1
+"""
