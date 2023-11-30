@@ -49,43 +49,43 @@ default_name = {
 
 dizionario_movimenti = {
     # R0
-    'M[0][0] basso': 'a',
-    'M[0][0] dx': 'b',
-    'M[0][1] sx': 'c',
-    'M[0][1] basso': 'd',
-    'M[0][1] dx': 'e',
-    'M[0][2] sx': 'f',
-    'M[0][2] basso': 'g',
-    'M[0][2] dx': 'h',
-    'M[0][3] sx': 'i',
-    'M[0][3] basso': 'j',
-    'M[0][3] dx': 'k',
-    'M[0][4] sx': 'l',
-    'M[0][4] basso': 'm',
+    'M[0][0] basso': 'a+',
+    'M[0][0] dx': 'b+',
+    'M[0][1] sx': 'c+',
+    'M[0][1] basso': 'd+',
+    'M[0][1] dx': 'e+',
+    'M[0][2] sx': 'f+',
+    'M[0][2] basso': 'g+',
+    'M[0][2] dx': 'h+',
+    'M[0][3] sx': 'i+',
+    'M[0][3] basso': 'j+',
+    'M[0][3] dx': 'k+',
+    'M[0][4] sx': 'l+',
+    'M[0][4] basso': 'm+',
     # R1
-    'M[1][0] basso': 'n',
-    'M[1][0] dx': 'o',
-    'M[1][0] alto': 'p',
-    'M[1][1] sx': 'q',
-    'M[1][1] basso': 'r',
-    'M[1][1] dx': 's',
-    'M[1][1] alto': 't',
-    'M[1][2] sx': 'u',
-    'M[1][2] basso': 'v',
-    'M[1][2] dx': 'x',
-    'M[1][2] alto': 'y',
-    'M[1][3] sx': 'z',
-    'M[1][3] basso': 'w',
-    'M[1][3] dx': '1',
-    'M[1][3] alto': '2',
-    'M[1][4] sx': '3',
-    'M[1][4] basso': '4',
-    'M[1][4] alto': '5',
+    'M[1][0] basso': 'n+',
+    'M[1][0] dx': 'o+',
+    'M[1][0] alto': 'p+',
+    'M[1][1] sx': 'q+',
+    'M[1][1] basso': 'r+',
+    'M[1][1] dx': 's+',
+    'M[1][1] alto': 't+',
+    'M[1][2] sx': 'u+',
+    'M[1][2] basso': 'v+',
+    'M[1][2] dx': 'x+',
+    'M[1][2] alto': 'y+',
+    'M[1][3] sx': 'z+',
+    'M[1][3] basso': 'w+',
+    'M[1][3] dx': '1+',
+    'M[1][3] alto': '2+',
+    'M[1][4] sx': '3+',
+    'M[1][4] basso': '4+',
+    'M[1][4] alto': '5+',
     # R2
-    'M[2][0] basso': '6',
-    'M[2][0] dx': '7',
-    'M[2][0] alto': '8',
-    'M[2][1] sx': '9',
+    'M[2][0] basso': '6+',
+    'M[2][0] dx': '7+',
+    'M[2][0] alto': '8+',
+    'M[2][1] sx': '9+',
     'M[2][1] basso': 'ctrl+a',
     'M[2][1] dx': 'ctrl+b',
     'M[2][1] alto': 'ctrl+c',
@@ -360,10 +360,13 @@ def checkMatrix(matrix):
     
 
 def send_input_gui(string):
+    print(f"Contenuto di 'string': {string}")
     c1, c2 = string.split('+')
     if c2 != '':  # se si usa CTRL o ALT come opzione
+        print(f'{Fore.GREEN} Pressed key = {c1} + {c2} {Style.RESET_ALL}')
         pyautogui.hotkey(c1, c2)
     else:
+        print(f'{Fore.GREEN} Pressed key = {c1} {Style.RESET_ALL}')
         pyautogui.press(c1)
 
 
@@ -476,7 +479,7 @@ def scan_matrice(matrice2):
                   matrice2[i][c], " ", matrice2[i][c+1], f"\t{Fore.GREEN}inizio controllo feasibility{Style.RESET_ALL}")
             move = check_row_feasibility(i, c, matrice2)
             if move:
-                send_input_gui(move)
+                send_input_gui(dizionario_movimenti[move])
                 break
             print()
             # [1, 2, 4, 4, 5]
@@ -493,7 +496,7 @@ def scan_matrice(matrice2):
                 f"{Fore.GREEN}Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
             move2 = check_column_feasibility(riga_index, j, matrice2)
             if move2:
-                send_input_gui(move2)
+                send_input_gui(dizionario_movimenti[move2])
                 break
             print()
         else:
@@ -529,6 +532,7 @@ time.sleep(2)
 
 consecutive_error = 0
 while(consecutive_error < 100):
+    time.sleep(1)
     #Cattura screenshot
     label = 'kz32'
     take_screenshot(870,330,490,620, label , name_script='Main.py')
