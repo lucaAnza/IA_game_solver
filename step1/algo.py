@@ -33,7 +33,7 @@ dizionario_movimenti = {
     'M[0][3] sx': 'i',
     'M[0][3] basso': 'j',
     'M[0][3] dx': 'k',
-    'M[0][4] dx': 'l',
+    'M[0][4] sx': 'l',
     'M[0][4] basso': 'm',
     # R1
     'M[1][0] basso': 'n',

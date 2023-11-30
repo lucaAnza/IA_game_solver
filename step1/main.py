@@ -35,5 +35,8 @@ time.sleep(2)
 # INIZIO:
 pyautogui.hotkey('COMBO', 'INIZIO')
 
-while True:
+flag = True
+while flag:
+    # controllo errori
+
     pass
