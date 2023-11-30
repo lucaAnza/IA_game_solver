@@ -1,5 +1,6 @@
 import pyautogui
-import time
+from colorama import Fore, Style
+
 
 matrice = [
     [1, 2, 3, 3, 5],
@@ -161,7 +162,7 @@ def check_adj_column(M, j):
 def valid_bound(i, j):
     if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
         return True
-    print("(((Elemento out of bounds)))")
+    print(f"{Fore.RED}(((Elemento out of bounds))){Style.RESET_ALL}")
     return False
 
 
@@ -169,7 +170,7 @@ def valid_bound(i, j):
 def valid_col_bound(i):
     if (i >= 0 and i <= 5):
         return True
-    print("(((Elemento out of bounds)))")
+    print(f"{Fore.RED}(((Elemento out of bounds))){Style.RESET_ALL}")
     return False
 
 
@@ -200,8 +201,8 @@ def check_column_feasibility(i, j, matrice):
 
     # nessuna possibile mossa trovata
     print(
-        f">>OUTPUT>> Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
-    return None
+        f"{Fore.RED} Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}{Style.RESET_ALL}\n")
+    return False
 
 # da eliminare i return true con gli indici dell'elemento da tradurre
 
@@ -232,7 +233,7 @@ def check_row_feasibility(i, j, matrice):
 
     # nessuna possibile mossa trovata
     print(
-        f">>OUTPUT>> Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n")
+        f"{Fore.RED}Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n{Style.RESET_ALL}")
     return False
 
 
@@ -240,25 +241,35 @@ def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
         if c != -1:  # condizione di adiacenza
-            print("Trovati due elementi simili nella riga ", i)
-            print("Indici = [", c, ",", c+1, "] -> ",
-                  matrice2[i][c], " ", matrice2[i][c+1], "\tinizio controllo feasibility")
-            check_row_feasibility(i, c, matrice2)
+            print(
+                f"{Fore.GREEN}Trovati due elementi simili nella riga {i} {Style.RESET_ALL}")
+            print(f"Indici = [", c, ",", c+1, "] -> ",
+                  matrice2[i][c], " ", matrice2[i][c+1], f"\t{Fore.GREEN}inizio controllo feasibility{Style.RESET_ALL}")
+            move = check_row_feasibility(i, c, matrice2)
+            if move:
+                send_input_gui(move)
+                break
             print()
             # [1, 2, 4, 4, 5]
         else:
-            print("Nessun elemento adiacente nella riga: ", i, "\n")
+            print(
+                f"{Fore.RED} Nessun elemento adiacente nella riga: {i}\n{Style.RESET_ALL}")
 
     for j in range(5):  # controllo per colonne
         riga_index = check_adj_column(matrice2, j)
         if riga_index != -1:  # condizione di adiacenza
-            print("Trovati due elementi simili nella colonna ", j)
             print(
-                f"Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]}")
-            check_column_feasibility(riga_index, j, matrice2)
+                f"{Fore.GREEN} Trovati due elementi simili nella colonna: {j}\n{Style.RESET_ALL}")
+            print(
+                f"{Fore.GREEN}Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
+            move2 = check_column_feasibility(riga_index, j, matrice2)
+            if move2:
+                send_input_gui(move2)
+                break
             print()
         else:
-            print("Nessun elemento adiacente nella colonna: ", j, "\n")
+            print(
+                f"{Fore.RED} Nessun elemento adiacente nella colonna: {j}\n{Style.RESET_ALL}")
 
 
 scan_matrice(matrice)
