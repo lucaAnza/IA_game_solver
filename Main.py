@@ -77,7 +77,7 @@ while(consecutive_error < 100):
     
     if(analyseBot.checkMatrix(matrix_number)):
         print(f'{Fore.GREEN}Check della matrice andato a buon fine!{Style.RESET_ALL}')
-        consecutive_error_count=0
+        consecutive_error=0
         solverBot.scan_matrice(matrix_number)
     else:
         print(f'{Fore.RED}Error {consecutive_error} {Style.RESET_ALL}')
@@ -85,7 +85,7 @@ while(consecutive_error < 100):
 
     end_time = datetime.datetime.now()
     exe_time = end_time-start_time
-    f"{Fore.LIGHTBLUE_EX} Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}"
+    print(f"{Fore.LIGHTBLUE_EX} Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}")
 
 
 

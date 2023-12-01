@@ -12,7 +12,8 @@ os.system("color") #abilita i colori nella shell
 
 
 #Global
-delay_keyPress = 0.2
+delay_keyPress_single = 0.160
+delay_keyPress_combo = 0.04
 num_righe = 6
 num_colonne = 5
 
@@ -170,11 +171,11 @@ def send_input_gui(string):
     if c2 != '':  # se si usa CTRL o ALT come opzione
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tPressed key: {c1}+{c2} {Style.RESET_ALL}")
-        pyautogui.hotkey(c1, c2 , interval=delay_keyPress)
+        pyautogui.hotkey(c1, c2 , interval=delay_keyPress_combo)
     else:
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Pressed key: {c1} {Style.RESET_ALL}")
-        pyautogui.press(c1 , interval=delay_keyPress)
+        pyautogui.press(c1 , interval=delay_keyPress_single)
 
 
 @timestamp_decorator
@@ -284,10 +285,11 @@ def check_row_feasibility(i, j, matrice):
     return False
 
 
-mossa = False
+
 
 @timestamp_decorator
 def scan_matrice(matrice2):
+    mossa = False
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
         if c != -1:  # condizione di adiacenza
