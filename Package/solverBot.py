@@ -1,16 +1,47 @@
-import cv2
-import numpy as np
-import time
-import pyautogui
 import pyautogui
 from colorama import Fore, Style
+import functools
+import datetime
+import os
 
-# Dimensione matrice
-num_righe = 6
-num_colonne = 5
-offset = 100
-delay_key = 0.3
 
+    
+os.system("color") #abilita i colori nella shell
+
+
+# {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
+
+
+def timestamp_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = datetime.datetime.now()
+        result = func(*args, **kwargs)
+        end_time = datetime.datetime.now()
+        exe_time = (end_time - start_time)
+        print(
+            f"{Fore.LIGHTBLUE_EX} Tempo esecuzione {func.__name__}: {exe_time}{Style.RESET_ALL}")
+        return result  # restituisce il risultato della chiamata originale
+    return wrapper
+
+
+matrice = [
+    [1, 2, 3, 3, 5],
+    [2, 3, 1, 5, 5],
+    [5, 5, 3, 2, 1],
+    [1, 3, 3, 4, 2],
+    [1, 2, 2, 3, 3],
+    [5, 5, 3, 1, 5]
+]
+
+matrice2 = [
+    [0, 1, 3, 4, 5],
+    [4, 3, 2, 1, 4],
+    [1, 2, 3, 4, 5],
+    [2, 2, 3, 1, 1],
+    [1, 2, 2, 4, 4],
+    [1, 2, 4, 4, 5]
+]
 
 
 dizionario_movimenti = {
@@ -122,106 +153,35 @@ dizionario_movimenti = {
 }
 
 
-
-# Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
-def matrix_from_img(img, delay = 200 , open_img = False):
-    # Dimnensione immagine
-    altezza_immagine, larghezza_immagine, _ = img.shape
-
-
-    # Calcola le dimensioni delle celle nella tua nuova griglia
-    larghezza_cella = larghezza_immagine // num_colonne
-    altezza_cella = altezza_immagine // num_righe
-
-    coordinate_celle = []
-
-    matrice_immagini = [
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
-    ]
-
-
-    for riga in range(num_righe):
-        for colonna in range(num_colonne):
-            # Calcola le coordinate della cella corrente
-            x1 = colonna * larghezza_cella
-            y1 = riga * altezza_cella
-            x2 = x1 + larghezza_cella
-            y2 = y1 + altezza_cella
-
-            # Aggiungi le coordinate alla lista
-            coordinate_celle.append((x1, y1, x2, y2))
-
-            # Ritaglia la cella dall'immagine
-            cell_img = img[y1:y2, x1:x2]
-            # cv2.imshow("Cella Ritagliata", cell_img)
-            # cv2.waitKey(2000)
-            matrice_immagini[riga].append(cell_img)
-
-    if ( open_img ):
-        cont = 1
-        for i in range(num_righe):
-            for j in range(num_colonne):
-                cv2.imshow(f"Immagine {cont}",
-                        matrice_immagini[i][j])
-                cv2.waitKey(delay)
-                cont += 1
-        cv2.destroyAllWindows()
-
-    return matrice_immagini
-
-    
-#Stampa una matrice di numrighe,numcolonne elementi
-def print_matrix(matrix):
-    
-    for i in range(num_righe):
-        for j in range(num_colonne):  
-            print(str(matrix[i][j]) , end = " ")
-        print()
-
-# True -> matrice senza unknown elements   False -> matrice con elementi sconosciuti
-def checkMatrix(matrix):
-    prod = 1
-    for i in range(num_righe):
-        for j in range(num_colonne):  
-            prod*=int(matrix[i][j])
-    
-    if(prod == 0):
-        return False
-    else:
-        return True
-    
-
+@timestamp_decorator
 def send_input_gui(string):
-    print(f"Contenuto di 'string': {string}")
+    print(
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} COMANDO PASSATO: {string} {Style.RESET_ALL}")
+
     c1, c2 = string.split('+')
     if c2 != '':  # se si usa CTRL o ALT come opzione
-        print(f'{Fore.GREEN} Pressed key = {c1} + {c2} {Style.RESET_ALL}')
-        pyautogui.hotkey(c1, c2)
-        time.sleep(float(delay_key))
+        print(
+            f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tPressed key: {c1}+{c2} {Style.RESET_ALL}")
+        # pyautogui.hotkey(c1, c2)
     else:
-        print(f'{Fore.GREEN} Pressed key = {c1} {Style.RESET_ALL}')
-        pyautogui.press(c1)
-        time.sleep(float(delay_key))
+        print(
+            f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Pressed key: {c1} {Style.RESET_ALL}")
+        # pyautogui.press(c1)
 
 
+@timestamp_decorator
 def check_adj_row(l):
     for i in range(len(l)):  # range 0-4
         '''print(
             f'check index {i} -> is M[{i}]-> {l[i]} == M[{i+1}]-> {l[i+1]}')'''
         if (i == 4):
             return -1
-        elif l[i] == 5:  # stella
-            return i+offset
         else:
             if l[i] == l[i+1]:
                 return i
 
 
+@timestamp_decorator
 def check_adj_column(M, j):
     for i in range(6):
         if (i == 5):
@@ -232,22 +192,26 @@ def check_adj_column(M, j):
 
 
 # controlla che il range sia valido per controllo orizzontale (e verticale outofline)
+@timestamp_decorator
 def valid_bound(i, j):
     if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
         return True
-    print(f"{Fore.RED}(((Elemento out of bounds))){Style.RESET_ALL}")
+    print(
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds))){Style.RESET_ALL}")
     return False
 
 
 # controlla che il range sia valido per controllo verticale
+@timestamp_decorator
 def valid_col_bound(i):
     if (i >= 0 and i <= 5):
         return True
-    print(f"{Fore.RED}(((Elemento out of bounds))){Style.RESET_ALL}")
+    print(
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds))){Style.RESET_ALL}")
     return False
 
 
-
+@timestamp_decorator
 def check_column_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i+1][j]
@@ -275,12 +239,13 @@ def check_column_feasibility(i, j, matrice):
 
     # nessuna possibile mossa trovata
     print(
-        f"{Fore.RED} Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}{Style.RESET_ALL}\n")
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}{Style.RESET_ALL}\n")
     return False
 
 # da eliminare i return true con gli indici dell'elemento da tradurre
 
 
+@timestamp_decorator
 def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i][j+1]
@@ -307,48 +272,51 @@ def check_row_feasibility(i, j, matrice):
 
     # nessuna possibile mossa trovata
     print(
-        f"{Fore.RED}Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n{Style.RESET_ALL}")
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tNessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n{Style.RESET_ALL}")
     return False
 
+
+mossa = False
+
+
+@timestamp_decorator
 def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
-        if c >= 100:   # condizione 
-            c = c-100
-            send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
-            break
-        elif c != -1:  # condizione di adiacenza
+        if c != -1:  # condizione di adiacenza
             print(
-                f"{Fore.GREEN}Trovati due elementi simili nella riga {i} {Style.RESET_ALL}")
-            print(f'c = {c}')
+                f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tTrovati due elementi simili nella riga {i} {Style.RESET_ALL}")
             print(f"Indici = [", c, ",", c+1, "] -> ",
-                  matrice2[i][c], " ", matrice2[i][c+1], f"\t{Fore.GREEN}inizio controllo feasibility{Style.RESET_ALL}")
+                  matrice2[i][c], " ", matrice2[i][c+1], "\n", f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\tinizio controllo feasibility{Style.RESET_ALL}")
             move = check_row_feasibility(i, c, matrice2)
-            if move:
+            if move and isinstance(move, str):
                 send_input_gui(dizionario_movimenti[move])
+                mossa = True
                 break
             print()
             # [1, 2, 4, 4, 5]
         else:
             print(
                 f"{Fore.RED} Nessun elemento adiacente nella riga: {i}\n{Style.RESET_ALL}")
+    if mossa != True:
+        for j in range(5):  # controllo per colonne
+            riga_index = check_adj_column(matrice2, j)
+            if riga_index != -1:  # condizione di adiacenza
+                print(
+                    f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Trovati due elementi simili nella colonna: {j}\n{Style.RESET_ALL}")
+                print(
+                    f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tIndici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
+                move2 = check_column_feasibility(riga_index, j, matrice2)
+                if move2 and isinstance(move2, str):
+                    send_input_gui(dizionario_movimenti[move2])
+                    break
+                print()
+            else:
+                print(
+                    f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Nessun elemento adiacente nella colonna: {j}\n{Style.RESET_ALL}")
 
-    for j in range(5):  # controllo per colonne
-        riga_index = check_adj_column(matrice2, j)
-        if riga_index != -1:  # condizione di adiacenza
-            print(
-                f"{Fore.GREEN} Trovati due elementi simili nella colonna: {j}\n{Style.RESET_ALL}")
-            print(
-                f"{Fore.GREEN}Indici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
-            move2 = check_column_feasibility(riga_index, j, matrice2)
-            if move2:
-                send_input_gui(dizionario_movimenti[move2])
-                break
-            print()
-        else:
-            print(
-                f"{Fore.RED} Nessun elemento adiacente nella colonna: {j}\n{Style.RESET_ALL}")
-            
+
+
 
 
 
@@ -356,4 +324,6 @@ def scan_matrice(matrice2):
 #MAIN
 
 if (__name__ == '__main__'):
-    print("Eseguo modulo")
+    import os
+
+    

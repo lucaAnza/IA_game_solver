@@ -12,8 +12,10 @@ from Package import *
 
 
 
-#GLOBALS
+#Setting
+os.system("color") #abilita i colori nella shell
 
+#Globals
 num_righe = solverBot.num_righe      
 num_colonne = solverBot.num_colonne   
 
