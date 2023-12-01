@@ -8,6 +8,7 @@ import os
 import pyautogui
 from colorama import Fore, Style
 import pyfiglet
+import functools
 
 
 # GLOBALS
@@ -21,6 +22,18 @@ num_righe = 6
 num_colonne = 5
 offset = 100
 delay_key = 0.3
+
+
+def timestamp_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = datetime.datetime.now()
+        result = func(*args, **kwargs)
+        end_time = datetime.datetime.now()
+        exe_time = (end_time - start_time)
+        print(f"{Fore.LIGHTBLUE_EX} Tempo esecuzione: {exe_time}{Style.RESET_ALL}")
+        return result  # restituisce il risultato della chiamata originale
+    return wrapper
 
 
 # Struttura dati che tiene i dati di check ( Green , Red )
