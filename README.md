@@ -2,27 +2,9 @@ Using AI to autosolve a game hosted on a Windows machine
 
 # MAIN-STEPS
 
-## 1. Screen capture
+## 1. Implemenet image processor 
+Using adequate libraries implement a processor able to distinguish between different shapes
 
-pyautogui library
+## 2. Matrix of image items
+Fill a matrix 6x5 of images that have to be encoded, each image equals a different integer
 
-## 2. Image processing
-
-## 3. Algorithm
-
-## 4. Automation
-
-# STEPS
-
-## 1. Autome resolution for online game ( no algoritm )
-
-- Learn PyAutoGUI’s ("https://pyautogui.readthedocs.io/en/latest/")
-- Automate playing a web-based game ("https://play2048.com/")
-  - Simple imput of: RIGHT-LEFT-UP-DOWN
-
-## 2. Recognize numbers from an image
-
-1. One digit integer
-2. Multiple digit integer
-3. Matrix of integers
-4. sono mattooooo
