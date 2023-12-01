@@ -31,7 +31,7 @@ def tempo_di_esecuzione(funzione):
     
 
 
-#MAIN
+#MAIN 
 print("\n\n")
 testo = "Game Solver"
 fig = pyfiglet.Figlet()
