@@ -10,9 +10,3 @@ Fill a matrix 6x5 of images that have to be encoded, each image equals a differe
 
 ## 3. Algorithm to find feasible solution
 Write an algo capable of outputting a valid move in order to continue the game given an input matrix of images (in number notation)
-
-## 4. Input - Output machine 
-Using the correct library, translate the algorithm output into a sequence of moves made by the system autonomously to complete the game level
-
-## 5. Let it run 
-Sit and watch :)
