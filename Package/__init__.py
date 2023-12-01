@@ -1,1 +1,1 @@
-__all__ = [ 'pixel_analizer' , 'screenBot'  ] 
+__all__ = [ 'analyseBot' , 'screenBot'  , 'solverBot' ] 
