@@ -3,10 +3,18 @@ from colorama import Fore, Style
 import functools
 import datetime
 import os
+import cv2
 
 
     
+#Setting    
 os.system("color") #abilita i colori nella shell
+
+
+#Global
+delay_keyPress = 0.2
+num_righe = 6
+num_colonne = 5
 
 
 # {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
@@ -162,11 +170,11 @@ def send_input_gui(string):
     if c2 != '':  # se si usa CTRL o ALT come opzione
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tPressed key: {c1}+{c2} {Style.RESET_ALL}")
-        # pyautogui.hotkey(c1, c2)
+        pyautogui.hotkey(c1, c2 , interval=delay_keyPress)
     else:
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Pressed key: {c1} {Style.RESET_ALL}")
-        # pyautogui.press(c1)
+        pyautogui.press(c1 , interval=delay_keyPress)
 
 
 @timestamp_decorator
@@ -278,7 +286,6 @@ def check_row_feasibility(i, j, matrice):
 
 mossa = False
 
-
 @timestamp_decorator
 def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
@@ -316,6 +323,56 @@ def scan_matrice(matrice2):
                     f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Nessun elemento adiacente nella colonna: {j}\n{Style.RESET_ALL}")
 
 
+# Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
+def matrix_from_img(img, delay = 200 , open_img = False):
+    # Dimnensione immagine
+    altezza_immagine, larghezza_immagine, _ = img.shape
+
+
+    # Calcola le dimensioni delle celle nella tua nuova griglia
+    larghezza_cella = larghezza_immagine // num_colonne
+    altezza_cella = altezza_immagine // num_righe
+
+    coordinate_celle = []
+
+    matrice_immagini = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ]
+
+
+    for riga in range(num_righe):
+        for colonna in range(num_colonne):
+            # Calcola le coordinate della cella corrente
+            x1 = colonna * larghezza_cella
+            y1 = riga * altezza_cella
+            x2 = x1 + larghezza_cella
+            y2 = y1 + altezza_cella
+
+            # Aggiungi le coordinate alla lista
+            coordinate_celle.append((x1, y1, x2, y2))
+
+            # Ritaglia la cella dall'immagine
+            cell_img = img[y1:y2, x1:x2]
+            # cv2.imshow("Cella Ritagliata", cell_img)
+            # cv2.waitKey(2000)
+            matrice_immagini[riga].append(cell_img)
+
+    if ( open_img ):
+        cont = 1
+        for i in range(num_righe):
+            for j in range(num_colonne):
+                cv2.imshow(f"Immagine {cont}",
+                        matrice_immagini[i][j])
+                cv2.waitKey(delay)
+                cont += 1
+        cv2.destroyAllWindows()
+
+    return matrice_immagini
 
 
 
@@ -324,6 +381,6 @@ def scan_matrice(matrice2):
 #MAIN
 
 if (__name__ == '__main__'):
-    import os
+    scan_matrice(matrice)
 
     

@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import sys
 import time
-import pyautogui
 import datetime
 import os
 import pyautogui
@@ -52,7 +51,8 @@ time.sleep(2)
 
 consecutive_error = 0
 while(consecutive_error < 100):
-    time.sleep(0.1)
+    start_time = datetime.datetime.now()  #debugging tempo
+
     #Cattura screenshot
     label = 'kz32'
     screenBot.take_screenshot(870,330,490,620, label)
@@ -82,4 +82,10 @@ while(consecutive_error < 100):
     else:
         print(f'{Fore.RED}Error {consecutive_error} {Style.RESET_ALL}')
         consecutive_error+=1
+
+    end_time = datetime.datetime.now()
+    exe_time = end_time-start_time
+    f"{Fore.LIGHTBLUE_EX} Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}"
+
+
 

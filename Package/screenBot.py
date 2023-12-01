@@ -19,9 +19,6 @@ def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , d
 
 
         
-
-
-
 #Funzione che salva tante immgini in modo tale da capire la più adatta
 def analysis_screenshot():
     
@@ -34,6 +31,9 @@ def analysis_screenshot():
             y = moltiplicatore * j
             print(f"screen x = {x}, y = {y} : {i}{j}")
             take_screenshot(x , y , label=f'{i}{j}')
+
+
+
     
 
 

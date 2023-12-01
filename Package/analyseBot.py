@@ -2,18 +2,7 @@ import cv2
 import numpy as np
 import sys
 import time
-
-# Ricorda per chiudere il processo : kill -9 $(pgrep -n "python")
-
-
-# DATI
-
-# Immagine[i,j] ritorna un array di 3  ( B , G , R)
-# Lo sfondo sta in un range di R = {237,250}   G = {208,211}   B = {210,216}
-
-"""sfondo_R = (237,250)
-sfondo_G = (208,211)
-sfondo_B = (210,216)"""
+from Package import solverBot
 
 
 #GLOBALS
@@ -23,8 +12,8 @@ sfondo_G = (180,220)
 sfondo_B = (180,230)
 
 # Dimensione matrice
-num_righe = 6
-num_colonne = 5
+num_righe = solverBot.num_righe
+num_colonne = solverBot.num_colonne
 
 
 
@@ -99,13 +88,11 @@ class item:
         if(debug):
             print(f"Type : {type}--------------")
             print(f"Incertezza : {incertezza}\nSum : {self.sum}\nDefault_sum = {default_sum}\nGreen/Default : {self.green}/{default_green}\nRed/Default : {self.red}/{default_red}" )
-        """return   (  (abs(self.sum-default_sum) < incertezza*2 ) and
+            """return   (  (abs(self.sum-default_sum) < incertezza*2 ) and
                  (  (abs(self.green-default_green) < incertezza) and (abs(self.red-default_red) < incertezza) ) )"""
             
         return valutation
             
-
-    
 
 
 #Dato l'array dei pixel, scarta i pixel di sfondo e fa una media degli altri
@@ -136,7 +123,6 @@ def avg_channel(array , channel_type = 'R'):
 #Data un immagine restituisce alcune informazioni sull'immagine
 def analizza_immagine(immagine , debug = False):
     
-
     # Esempio di operazioni di analisi dei dati dell'immagine
     altezza, larghezza, canali = immagine.shape
 
@@ -172,59 +158,6 @@ def analizza_immagine(immagine , debug = False):
         
 
 
-    
-
-
-# Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
-def matrix_from_img(img, delay = 200 , open_img = False):
-    # Dimnensione immagine
-    altezza_immagine, larghezza_immagine, _ = img.shape
-
-
-    # Calcola le dimensioni delle celle nella tua nuova griglia
-    larghezza_cella = larghezza_immagine // num_colonne
-    altezza_cella = altezza_immagine // num_righe
-
-    coordinate_celle = []
-
-    matrice_immagini = [
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
-    ]
-
-
-    for riga in range(num_righe):
-        for colonna in range(num_colonne):
-            # Calcola le coordinate della cella corrente
-            x1 = colonna * larghezza_cella
-            y1 = riga * altezza_cella
-            x2 = x1 + larghezza_cella
-            y2 = y1 + altezza_cella
-
-            # Aggiungi le coordinate alla lista
-            coordinate_celle.append((x1, y1, x2, y2))
-
-            # Ritaglia la cella dall'immagine
-            cell_img = img[y1:y2, x1:x2]
-            # cv2.imshow("Cella Ritagliata", cell_img)
-            # cv2.waitKey(2000)
-            matrice_immagini[riga].append(cell_img)
-
-    if ( open_img ):
-        cont = 1
-        for i in range(num_righe):
-            for j in range(num_colonne):
-                cv2.imshow(f"Immagine {cont}",
-                        matrice_immagini[i][j])
-                cv2.waitKey(delay)
-                cont += 1
-        cv2.destroyAllWindows()
-
-    return matrice_immagini
 
     
 #Stampa una matrice di numrighe,numcolonne elementi
@@ -251,10 +184,11 @@ def checkMatrix(matrix):
 
 #MAIN
 
-
 if ( __name__ == "__main__"):
+    
+    inizio = time.time()
 
-    nome_file_immagine = "Screen_bot.png"
+    nome_file_immagine = "Screenshot/Screenshot.png"
     immagine = cv2.imread(nome_file_immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
@@ -271,7 +205,7 @@ if ( __name__ == "__main__"):
     #cv2.waitKey(5000)
 
 
-    matrix_img = matrix_from_img(immagine_ritagliata , 500 , open_img = False)
+    matrix_img = solverBot.matrix_from_img(immagine_ritagliata , 500 , open_img = False)
     matrix_item = [ [] , [] , [] , [] , [] , [] ]
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
 
@@ -283,6 +217,11 @@ if ( __name__ == "__main__"):
 
 
     print_matrix(matrix_item)
+
+    script_name = sys.argv[0]
+    fine = time.time()
+    tempo_esecuzione = fine - inizio
+    print(f"La funzione '{script_name}' ha impiegato {tempo_esecuzione:.4f} secondi.")
 
 
     
