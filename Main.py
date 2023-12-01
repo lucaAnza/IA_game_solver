@@ -8,6 +8,7 @@ import os
 import pyautogui
 from colorama import Fore, Style
 import pyfiglet
+from Package import *
 
 
 #GLOBALS
@@ -24,30 +25,6 @@ delay_key = 0.3
 
 
 
-#Struttura dati che tiene i dati di check ( Green , Red )
-defalt_pixel = { 
-    'hat' : (42,41) ,
-    'iced_hat' : (47,61) ,
-    'skate' : (29,33) ,
-    'iced_skate' : (32,41) ,
-    'pizza' : (26,21) ,
-    'iced_pizza' : (25,45) ,
-    'can' : (39,18) ,
-    'iced_can' : (28,56) ,
-    'star' : (20,11) }
-
-default_name = {
-    'hat' : 1 ,
-    'iced_hat' : 1 ,
-    'skate' : 2 ,
-    'iced_skate' : 2 ,
-    'pizza' : 3 ,
-    'iced_pizza' : 3 ,
-    'can' : 4 ,
-    'iced_can' : 4 ,
-    'star' : 5 ,
-    'Unknown_Item' : 0
-}
 
 dizionario_movimenti = {
     # R0
@@ -157,135 +134,24 @@ dizionario_movimenti = {
     'M[5][4] alto': 'alt+2',
 }
 
-
-
-#Classe per gli oggetti
-class item:
-    def __init__(self, green, red , nome = "General_item"):
-        self.nome = nome
-        self.green = green
-        self.red = red
-        self.sum = green+red
-    
-    def getItemType(self , debug = False):
-        
-        #Hat
-        for incertezza in range (2,4) : 
-            if self.__isInIntervall('hat',incertezza,debug):
-                return "hat"
-            elif self.__isInIntervall('skate',incertezza,debug):
-                return "skate"
-            elif self.__isInIntervall('pizza',incertezza,debug):
-                return "pizza"
-            elif self.__isInIntervall('can',incertezza,debug):
-                return "can"
-            elif self.__isInIntervall('star',incertezza,debug):
-                return "star"
-            elif self.__isInIntervall('iced_hat',incertezza,debug):
-                return "iced_hat"
-            elif self.__isInIntervall('iced_skate',incertezza,debug):
-                return "iced_skate"
-            elif self.__isInIntervall('iced_pizza',incertezza,debug):
-                return "iced_pizza"
-            elif self.__isInIntervall('iced_can',incertezza,debug):
-                return "iced_can"
-            
-        return "Unknown_Item"
         
         
-    
-    def __isInIntervall(self  , type , incertezza ,debug = False):
-        default_green = defalt_pixel[type][0]
-        default_red = defalt_pixel[type][1]
-        default_sum = default_green + default_red
-        valutation = (  (abs(self.sum-default_sum) <= incertezza*2 ) and
-                 (  (abs(self.green-default_green) <= incertezza) and (abs(self.red-default_red) <= incertezza) ) )
-        if(debug):
-            print(f"Type : {type}--------------")
-            print(f"Incertezza : {incertezza}\nSum : {self.sum}\nDefault_sum = {default_sum}\nGreen/Default : {self.green}/{default_green}\nRed/Default : {self.red}/{default_red}" )
-        """return   (  (abs(self.sum-default_sum) < incertezza*2 ) and
-                 (  (abs(self.green-default_green) < incertezza) and (abs(self.red-default_red) < incertezza) ) )"""
-            
-        return valutation
-            
-
-#Funzione che esegue uno screenshot
-def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False , name_script = "Main.py"):
-
-    screenshot = pyautogui.screenshot(region=(x, y, width, height))
-    current_directory = os.path.abspath(__file__)
-    name_script = "Main.py"
-    file_path = str(current_directory[:-len(name_script)].replace('\\' , '/')) + str(f"screenshot{label}.png")     # 9 rappresenta la lunghezza del nome dello script -> screen.py
-    screenshot.save(file_path)
-    if(debug):
-        print(f"Screenshot salvato in: {file_path}")
 
 
-#Dato l'array dei pixel, scarta i pixel di sfondo e fa una media degli altri
-def avg_channel(array , channel_type = 'R'):
-    sum = 0
-    if(channel_type == 'R'):
-        indice = 2
-        for i in array:
-            elem = i[indice]
-            if( not(elem >= sfondo_R[0] and elem <= sfondo_R[1] ) ):    # In questo modo scarta i pixel di sfondo
-                sum = sum + elem
-    elif(channel_type == 'G'):
-        indice = 1
-        for i in array:
-            elem = i[indice]
-            if( not(elem >= sfondo_G[0] and elem <= sfondo_G[1] ) ):    # In questo modo scarta i pixel di sfondo
-                sum = sum + elem
-    else:
-        indice = 0
-        for i in array:
-            elem = i[indice]
-            if( not(elem >= sfondo_B[0] and elem <= sfondo_B[1] ) ):    # In questo modo scarta i pixel di sfondo
-                sum = sum + elem
-    
-    return sum/len(array)
 
 
-#Data un immagine restituisce alcune informazioni sull'immagine
-def analizza_immagine(immagine , debug = False):
-    
+#Decoratore
+def tempo_di_esecuzione(funzione):
+    def wrapper(*args, **kwargs):
+        inizio = time.time()
+        risultato = funzione(*args, **kwargs)
+        fine = time.time()
+        tempo_esecuzione = fine - inizio
+        print(f"La funzione '{funzione.__name__}' ha impiegato {tempo_esecuzione:.4f} secondi.")
+        return risultato
+    return wrapper
 
-    # Esempio di operazioni di analisi dei dati dell'immagine
-    altezza, larghezza, canali = immagine.shape
-    numero_pixel = altezza * larghezza
 
-    # Calcola la media dei valori dei pixel per ogni canale
-    media_canale1 = np.mean(immagine[:, :, 0])
-    media_canale2 = np.mean(immagine[:, :, 1])
-    media_canale3 = np.mean(immagine[:, :, 2])
-    
-    #Crea un array di pixel ( ogni pixel è un array di 3 )
-    arr = []
-    for i in range(altezza):
-        for j in range(larghezza):
-            arr.append(immagine[i,j])
-
-    
-    green = int(avg_channel(arr , "G"))
-    red = int(avg_channel(arr , "R"))
-    output_analysis = item(green , red)
-
-    #Debug
-    if(debug) : 
-        print("\n")
-        print(f"Altezza: {altezza} pixel")
-        print(f"Larghezza: {larghezza} pixel")
-        print(f"Numero di pixel: {numero_pixel}")
-        print("-----------------------------------")
-        print(output_analysis.getItemType(debug=True))
-        time.sleep(1)
-        print("-----------------------------------")
-        print(f'Green : {green}')
-        print(f'Red : {red}')
-        print("\n")
-
-    return(output_analysis.getItemType())
-        
 
 
 # Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
@@ -475,7 +341,7 @@ def check_row_feasibility(i, j, matrice):
         f"{Fore.RED}Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}\n{Style.RESET_ALL}")
     return False
 
-
+@tempo_di_esecuzione
 def scan_matrice(matrice2):
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
@@ -517,8 +383,6 @@ def scan_matrice(matrice2):
 
 
 
- 
-
 
 
 
@@ -547,7 +411,7 @@ while(consecutive_error < 100):
     time.sleep(0.1)
     #Cattura screenshot
     label = 'kz32'
-    take_screenshot(870,330,490,620, label , name_script='Main.py')
+    screenBot.take_screenshot(870,330,490,620, label , name_script='Main.py')
     img_name = f"screenshot{label}.png"
     immagine = cv2.imread(img_name)
     if immagine is None:
@@ -563,9 +427,9 @@ while(consecutive_error < 100):
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
     for i in range(num_righe):
         for j in range(num_colonne):
-            res = analizza_immagine(matrix_img[i][j] , debug=False)
+            res = pixel_analizer.analizza_immagine(matrix_img[i][j] , debug=False)
             matrix_item[i].append(res)
-            matrix_number[i].append(default_name[str(res)])
+            matrix_number[i].append(pixel_analizer.default_name[str(res)])
     
     if(checkMatrix(matrix_number)):
         print(f'{Fore.GREEN}Check della matrice andato a buon fine!{Style.RESET_ALL}')

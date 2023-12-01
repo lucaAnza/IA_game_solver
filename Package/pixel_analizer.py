@@ -139,12 +139,7 @@ def analizza_immagine(immagine , debug = False):
 
     # Esempio di operazioni di analisi dei dati dell'immagine
     altezza, larghezza, canali = immagine.shape
-    numero_pixel = altezza * larghezza
 
-    # Calcola la media dei valori dei pixel per ogni canale
-    media_canale1 = np.mean(immagine[:, :, 0])
-    media_canale2 = np.mean(immagine[:, :, 1])
-    media_canale3 = np.mean(immagine[:, :, 2])
     
     #Crea un array di pixel ( ogni pixel è un array di 3 )
     arr = []
@@ -159,6 +154,7 @@ def analizza_immagine(immagine , debug = False):
 
     #Debug
     if(debug) : 
+        numero_pixel = altezza * larghezza
         print("\n")
         print(f"Altezza: {altezza} pixel")
         print(f"Larghezza: {larghezza} pixel")
@@ -170,6 +166,7 @@ def analizza_immagine(immagine , debug = False):
         print(f'Green : {green}')
         print(f'Red : {red}')
         print("\n")
+
 
     return(output_analysis.getItemType())
         
@@ -254,74 +251,41 @@ def checkMatrix(matrix):
 
 #MAIN
 
-nome_file_immagine = "Screen_bot.png"
-immagine = cv2.imread(nome_file_immagine)
 
-# Verifica che l'immagine sia stata caricata correttamente
-if immagine is None:
-    print("Errore nel caricamento dell'immagine.")
-    sys.exit()
+if ( __name__ == "__main__"):
 
-x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
-immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
-altezza, larghezza, canali = immagine.shape
+    nome_file_immagine = "Screen_bot.png"
+    immagine = cv2.imread(nome_file_immagine)
 
-
-#cv2.imshow("img" , immagine_ritagliata)
-#cv2.waitKey(5000)
-
-
-matrix_img = matrix_from_img(immagine_ritagliata , 500 , open_img = False)
-matrix_item = [ [] , [] , [] , [] , [] , [] ]
-matrix_number = [ [] , [] , [] , [] , [] , [] ]
-
-for i in range(num_righe):
-    for j in range(num_colonne):
-        res = analizza_immagine(matrix_img[i][j] , debug=False)
-        matrix_item[i].append(res)
-        matrix_number[i].append(default_name[str(res)])
-
-
-print_matrix(matrix_item)
-
-
-    
-
-
-
-"""
-#Script finale
-attesa = 10
-for i in range(attesa):
-    print(f"Starting bot in {attesa-i} seconds...")
-    time.sleep(1)
-
-consecutive_error = 0
-while(consecutive_error < 100):
-    #Cattura screenshot
-    label = 'kz32'
-    #take_screenshot(870,330,490,620, label)
-    img_name = f"screenshot{label}.png"
-    immagine = cv2.imread(img_name)
+    # Verifica che l'immagine sia stata caricata correttamente
     if immagine is None:
         print("Errore nel caricamento dell'immagine.")
         sys.exit()
-    
-    #Crea la matrice di item e numeri
-    matrix_img = matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+
+    x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+    immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
+    altezza, larghezza, canali = immagine.shape
+
+
+    #cv2.imshow("img" , immagine_ritagliata)
+    #cv2.waitKey(5000)
+
+
+    matrix_img = matrix_from_img(immagine_ritagliata , 500 , open_img = False)
     matrix_item = [ [] , [] , [] , [] , [] , [] ]
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
+
     for i in range(num_righe):
         for j in range(num_colonne):
             res = analizza_immagine(matrix_img[i][j] , debug=False)
             matrix_item[i].append(res)
             matrix_number[i].append(default_name[str(res)])
+
+
+    print_matrix(matrix_item)
+
+
     
-    if(checkMatrix(matrix_number)):
-        consecutive_error_count=0
-        #Ritorna il pulsante da cliccare
-        #pulsante = algoritmoCri(matrix_number)
-        # -> Clicca il pulsante
-    else:
-        consecutive_error+=1
-"""
+
+
+

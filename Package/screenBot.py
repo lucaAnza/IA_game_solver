@@ -18,6 +18,9 @@ def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , d
         print(f"Screenshot salvato in: {file_path}")
 
 
+        
+
+
 
 #Funzione che salva tante immgini in modo tale da capire la più adatta
 def analysis_screenshot():
@@ -34,13 +37,14 @@ def analysis_screenshot():
     
 
 
-# Chiama la funzione per catturare lo screenshot
-attesa = 5
-for i in range(attesa):
-    print(f"Screen tra {attesa-i} secondi...")
-    time.sleep(1)
+ 
+if ( __name__ == '__main__'):        # Controlla se è eseguita direttamente
 
+    attesa = 5
+    for i in range(attesa):
+        print(f"Screen tra {attesa-i} secondi...")
+        time.sleep(1)
 
-take_screenshot(870,330,490,620)
+    take_screenshot(870,330,490,620)
 
 

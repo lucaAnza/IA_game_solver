@@ -8,9 +8,17 @@ pyautogui library
 
 ## 2. Image processing
 
+OpenCV
+
 ## 3. Algorithm
 
+Standard library
+
 ## 4. Automation
+
+Use Bluestack's macros
+
+
 
 # STEPS
 
@@ -20,7 +28,7 @@ pyautogui library
 - Automate playing a web-based game ("https://play2048.com/")
   - Simple imput of: RIGHT-LEFT-UP-DOWN
 
-## 2. Recognize numbers from an image
+## 2. Recognize numbers from an image using IA
 
 1. One digit integer
 2. Multiple digit integer
