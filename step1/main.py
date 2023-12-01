@@ -38,5 +38,7 @@ pyautogui.hotkey('COMBO', 'INIZIO')
 flag = True
 while flag:
     # controllo errori
-
     pass
+
+
+## big fat main##
