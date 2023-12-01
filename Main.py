@@ -53,8 +53,8 @@ while(consecutive_error < 100):
     time.sleep(0.1)
     #Cattura screenshot
     label = 'kz32'
-    screenBot.take_screenshot(870,330,490,620, label , name_script='Main.py')
-    img_name = f"screenshot{label}.png"
+    screenBot.take_screenshot(870,330,490,620, label)
+    img_name = f"Screenshot/screenshot{label}.png"
     immagine = cv2.imread(img_name)
     if immagine is None:
         print("Errore nel caricamento dell'immagine.")

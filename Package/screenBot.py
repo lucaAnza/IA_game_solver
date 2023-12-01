@@ -7,12 +7,12 @@ import time
 
 
 #Funzione che esegue uno screenshot
-def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False):
-
+def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False ):
+    script_name='screenBot.py'
     screenshot = pyautogui.screenshot(region=(x, y, width, height))
     current_directory = os.path.abspath(__file__)
-    script_name = "Main.py"
-    file_path = str(current_directory[:-len(script_name)].replace('\\' , '/')) + str(f"screenshot{label}.png")     # 9 rappresenta la lunghezza del nome dello script -> screen.py
+    path_from_current_dir = f"../Screenshot/screenshot{label}.png"
+    file_path = str(current_directory[:-len(script_name)].replace('\\' , '/')) + str(path_from_current_dir)     
     screenshot.save(file_path)
     if(debug):
         print(f"Screenshot salvato in: {file_path}")
@@ -45,6 +45,6 @@ if ( __name__ == '__main__'):        # Controlla se è eseguita direttamente
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
 
-    take_screenshot(870,330,490,620)
+    take_screenshot(870,330,490,620,debug=True)
 
 
