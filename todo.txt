@@ -1,7 +1,0 @@
-automatizzare il primo step:
-
-interagire con un gioco online e fare le stesse 4 mosse in loop 
-    up-right-down-left -> check
-
-
-    chris dep2
