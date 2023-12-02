@@ -16,6 +16,7 @@ delay_keyPress_single = 0.04
 delay_keyPress_combo = 0.01
 num_righe = 6
 num_colonne = 5
+offset = 100
 
 
 # {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
@@ -185,6 +186,8 @@ def check_adj_row(l):
             f'check index {i} -> is M[{i}]-> {l[i]} == M[{i+1}]-> {l[i+1]}')'''
         if (i == 4):
             return -1
+        elif l[i] == 5:  # stella
+            return i+offset
         else:
             if l[i] == l[i+1]:
                 return i
@@ -292,7 +295,12 @@ def scan_matrice(matrice2):
     mossa = False
     for i in range(6):  # controllo per righe
         c = check_adj_row(matrice2[i])
-        if c != -1:  # condizione di adiacenza
+        if c >= offset:   # condizione stella
+            c = c-offset
+            send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
+            mossa = True
+            break
+        elif c != -1:  # condizione di adiacenza
             print(
                 f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tTrovati due elementi simili nella riga {i} {Style.RESET_ALL}")
             print(f"Indici = [", c, ",", c+1, "] -> ",
