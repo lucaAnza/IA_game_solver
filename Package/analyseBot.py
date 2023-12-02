@@ -169,19 +169,14 @@ def print_matrix(matrix):
         print()
 
 # True -> matrice senza unknown elements   False -> matrice con elementi sconosciuti
-def checkMatrix(matrix):
+def checkMatrixProduct(matrix):
     
-    red_flag_result = { 0 , 30 , 60 , 90 , 120 , 150}
-
     prod = 1
     for i in range(num_righe):
         for j in range(num_colonne):  
             prod*=int(matrix[i][j])
     
-    if(prod in red_flag_result):
-        return False
-    else:
-        return True
+    return prod
  
     
 
