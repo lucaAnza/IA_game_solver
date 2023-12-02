@@ -50,7 +50,9 @@ time.sleep(2)
 
 
 consecutive_error = 0
+general_counter = 0
 while(consecutive_error < 100):
+    print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}")
     start_time = datetime.datetime.now()  #debugging tempo
 
     #Cattura screenshot
@@ -72,8 +74,13 @@ while(consecutive_error < 100):
     for i in range(num_righe):
         for j in range(num_colonne):
             res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
-            matrix_item[i].append(res)
+            #matrix_item[i].append(res)
             matrix_number[i].append(analyseBot.default_name[str(res)])
+    
+    #Debug analisi
+    print(f"\n{Fore.YELLOW}Matrix item: ")
+    analyseBot.print_matrix(matrix_number)
+    print(f"{Style.RESET_ALL}\n")
     
     if(analyseBot.checkMatrix(matrix_number)):
         print(f'{Fore.GREEN}Check della matrice andato a buon fine!{Style.RESET_ALL}')
@@ -85,7 +92,9 @@ while(consecutive_error < 100):
 
     end_time = datetime.datetime.now()
     exe_time = end_time-start_time
-    print(f"{Fore.LIGHTBLUE_EX} Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}")
+    print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}\n\n")
+    general_counter+=1
 
 
 

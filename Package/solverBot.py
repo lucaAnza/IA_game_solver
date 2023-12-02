@@ -6,14 +6,14 @@ import os
 import cv2
 
 
-    
+
 #Setting    
 os.system("color") #abilita i colori nella shell
 
 
 #Global
-delay_keyPress_single = 0.160
-delay_keyPress_combo = 0.04
+delay_keyPress_single = 0.04
+delay_keyPress_combo = 0.01
 num_righe = 6
 num_colonne = 5
 
