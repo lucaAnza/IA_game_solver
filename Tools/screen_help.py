@@ -11,6 +11,9 @@ import sys
 #Informazioni utili
 
 # Pixel attuale : x = 870, y = 330, height = 490, width = 620
+# Ritaglio : x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+#            immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
+# Pixel ipotetico x = 886 , y = 360 , height = 455 , width = 546 -> (886,360,455,546)
 
 
 #Funzione che esegue uno screenshot
@@ -64,7 +67,7 @@ if ( __name__ == '__main__'):        # Controlla se è eseguita direttamente
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
 
-    path = take_screenshot(0,0,300,300,debug=True,fullScreen=True, label='[HELP]')
+    path = take_screenshot(886,360,455,546,debug=True,fullScreen=False, label='[HELP]')
     immagine = cv2.imread(path)
 
     # Verifica che l'immagine sia stata caricata correttamente

@@ -60,3 +60,13 @@ end_time = time.time()
 
 print(f"Tempo impiegato: {end_time - start_time} secondi")
 """
+
+
+
+### Ritaglio immagine
+
+
+#screenBot.take_screenshot(870,330,490,620, label)
+#Ritaglio immagine, per adattarla al secondo taglio
+#x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+#immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]

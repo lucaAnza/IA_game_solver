@@ -60,6 +60,12 @@ while(consecutive_error < 100):
     print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}")
     start_time = datetime.datetime.now()  #debugging tempo
 
+    #screenBot.take_screenshot(870,330,490,620, label)
+#Ritaglio immagine, per adattarla al secondo taglio
+#x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+#immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
+
+
     #Cattura screenshot
     label = 'kz32'
     screenBot.take_screenshot(870,330,490,620, label)
@@ -68,15 +74,35 @@ while(consecutive_error < 100):
     if immagine is None:
         print("Errore nel caricamento dell'immagine.")
         sys.exit()
-    #Ritaglio immagine, per adattarla al secondo taglio
-    x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
-    immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
     
+    #Ritaglio
+    x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
+    immagine = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
     #Crea la matrice di item e numeri
-    matrix_img = solverBot.matrix_from_img(immagine_ritagliata , 200 , open_img = False)
+    matrix_img = solverBot.matrix_from_img(immagine , 200 , open_img = False)
     matrix_item = [ [] , [] , [] , [] , [] , [] ]
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
     found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number)
+
+
+    """OPTION2
+
+    #Cattura screenshot
+    label = 'kz32'
+    screenBot.take_screenshot(886,360,455,546, label)
+    img_name = f"Screenshot/screenshot{label}.png"
+    immagine = cv2.imread(img_name)
+    if immagine is None:
+        print("Errore nel caricamento dell'immagine.")
+        sys.exit()
+    
+    #Crea la matrice di item e numeri
+    matrix_img = solverBot.matrix_from_img(immagine , 200 , open_img = False)
+    matrix_item = [ [] , [] , [] , [] , [] , [] ]
+    matrix_number = [ [] , [] , [] , [] , [] , [] ]
+    found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number)
+
+    """
     
 
     if(not(found_unknown_item)):     #Se almeno un elemento non l'ha riconosciuto [ prod == 0] non entra.

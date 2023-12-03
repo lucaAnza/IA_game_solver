@@ -115,7 +115,7 @@ dizionario_movimenti = {
     'M[3][2] basso': 'ctrl+x',
     'M[3][2] dx': 'ctrl+y',
     'M[3][2] alto': 'ctrl+z',
-    'M[3][3] sx': 'ctrl+0',
+    'M[3][3] sx': 'ctrl+w',
     'M[3][3] basso': 'ctrl+1',
     'M[3][3] dx': 'ctrl+2',
     'M[3][3] alto': 'ctrl+3',

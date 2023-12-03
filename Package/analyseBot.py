@@ -190,6 +190,7 @@ if ( __name__ == "__main__"):
     inizio = time.time()
 
     nome_file_immagine = "Screenshot/Screenshot.png"
+
     immagine = cv2.imread(nome_file_immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
@@ -199,11 +200,6 @@ if ( __name__ == "__main__"):
 
     x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
     immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza] 
-    altezza, larghezza, canali = immagine.shape
-
-
-    #cv2.imshow("img" , immagine_ritagliata)
-    #cv2.waitKey(5000)
 
 
     matrix_img = solverBot.matrix_from_img(immagine_ritagliata , 500 , open_img = False)
