@@ -4,7 +4,6 @@ import sys
 import time
 import datetime
 import os
-import pyautogui
 from colorama import Fore, Style
 import pyfiglet
 from Package import *
@@ -18,20 +17,24 @@ os.system("color") #abilita i colori nella shell
 num_righe = solverBot.num_righe      
 num_colonne = solverBot.num_colonne   
 
-#Decoratore
-def tempo_di_esecuzione(funzione):
-    def wrapper(*args, **kwargs):
-        inizio = time.time()
-        risultato = funzione(*args, **kwargs)
-        fine = time.time()
-        tempo_esecuzione = fine - inizio
-        print(f"La funzione '{funzione.__name__}' ha impiegato {tempo_esecuzione:.4f} secondi.")
-        return risultato
-    return wrapper
+
+@decoratori.timestamp_decorator
+def fill_Item_Matrix(string_matrix , int_matrix):
+    found_unknown_item = False
+    for i in range(num_righe):
+        for j in range(num_colonne):
+            res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
+            int_matrix[i].append(analyseBot.default_name[str(res)])
+            if(int(analyseBot.default_name[str(res)]) == 0):
+                found_unknown_item = True
+                break
+        if(found_unknown_item):
+            break
+    
+    return found_unknown_item
+
 
     
-
-
 #MAIN 
 print("\n\n")
 testo = "Game Solver"
@@ -73,17 +76,7 @@ while(consecutive_error < 100):
     matrix_img = solverBot.matrix_from_img(immagine_ritagliata , 200 , open_img = False)
     matrix_item = [ [] , [] , [] , [] , [] , [] ]
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
-    for i in range(num_righe):
-        for j in range(num_colonne):
-            res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
-            matrix_number[i].append(analyseBot.default_name[str(res)])
-            if(int(analyseBot.default_name[str(res)]) == 0):
-                found_unknown_item = True
-                break
-        if(found_unknown_item):
-            break
-                
-            
+    found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number)
     
 
     if(not(found_unknown_item)):     #Se almeno un elemento non l'ha riconosciuto [ prod == 0] non entra.

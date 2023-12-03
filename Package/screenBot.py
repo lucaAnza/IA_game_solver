@@ -8,7 +8,7 @@ import time
 
 #Funzione che esegue uno screenshot
 def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , debug = False  , fullScreen = False):
-    script_name='screen_help.py'
+    script_name='screenBot.py'
 
     if(fullScreen):
         screenshot = pyautogui.screenshot()

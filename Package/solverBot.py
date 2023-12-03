@@ -4,6 +4,7 @@ import functools
 import datetime
 import os
 import cv2
+from Package import decoratori
 
 
 
@@ -22,17 +23,7 @@ offset = 100
 # {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
 
 
-def timestamp_decorator(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start_time = datetime.datetime.now()
-        result = func(*args, **kwargs)
-        end_time = datetime.datetime.now()
-        exe_time = (end_time - start_time)
-        print(
-            f"{Fore.LIGHTBLUE_EX} Tempo esecuzione {func.__name__}: {exe_time}{Style.RESET_ALL}")
-        return result  # restituisce il risultato della chiamata originale
-    return wrapper
+
 
 
 matrice = [
@@ -163,7 +154,7 @@ dizionario_movimenti = {
 }
 
 
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def send_input_gui(string):
     print(
         f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} COMANDO PASSATO: {string} {Style.RESET_ALL}")
@@ -179,7 +170,8 @@ def send_input_gui(string):
         pyautogui.press(c1 , interval=delay_keyPress_single)
 
 
-@timestamp_decorator
+#Funzione che ritorna l'indice di colonna del primo elemento di una successione di 2
+@decoratori.timestamp_decorator
 def check_adj_row(l):
     for i in range(len(l)):  # range 0-4
         '''print(
@@ -192,8 +184,7 @@ def check_adj_row(l):
             if l[i] == l[i+1]:
                 return i
 
-
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def check_adj_column(M, j):
     for i in range(6):
         if (i == 5):
@@ -204,26 +195,25 @@ def check_adj_column(M, j):
 
 
 # controlla che il range sia valido per controllo orizzontale (e verticale outofline)
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def valid_bound(i, j):
     if ((i >= 0 and i <= 5) and (j >= 0 and j <= 4)):
         return True
     print(
-        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds))){Style.RESET_ALL}")
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds[i,j = {i,j}]))){Style.RESET_ALL}")
     return False
 
 
 # controlla che il range sia valido per controllo verticale
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def valid_col_bound(i):
     if (i >= 0 and i <= 5):
         return True
     print(
-        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds))){Style.RESET_ALL}")
+        f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds[i = {i}]))){Style.RESET_ALL}")
     return False
 
-
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def check_column_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i+1][j]
@@ -254,10 +244,9 @@ def check_column_feasibility(i, j, matrice):
         f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Nessuna mossa valida trovata per elemento M[{i}][{j}] -> {matrice[i][j]}{Style.RESET_ALL}\n")
     return False
 
-# da eliminare i return true con gli indici dell'elemento da tradurre
 
 
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
     el2 = matrice[i][j+1]
@@ -290,17 +279,17 @@ def check_row_feasibility(i, j, matrice):
 
 
 
-@timestamp_decorator
+@decoratori.timestamp_decorator
 def scan_matrice(matrice2):
     mossa = False
     for i in range(6):  # controllo per righe
-        c = check_adj_row(matrice2[i])
+        c = check_adj_row(matrice2[i])  #Ritorna indice di colonna
         if c >= offset:   # condizione stella
             c = c-offset
             send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
             mossa = True
             break
-        elif c != -1:  # condizione di adiacenza
+        elif c != -1:  # condizione di adiacenza sulla riga
             print(
                 f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tTrovati due elementi simili nella riga {i} {Style.RESET_ALL}")
             print(f"Indici = [", c, ",", c+1, "] -> ",
