@@ -4,7 +4,12 @@ import functools
 import datetime
 import os
 import cv2
-from Package import decoratori
+
+if __name__ == "__main__" or __name__ == 'solverBot':
+    import decoratori
+else:
+    print(__name__)
+    from Package import decoratori
 
 
 

@@ -2,9 +2,11 @@ import cv2
 import numpy as np
 import sys
 import time
-from Package import solverBot
-from Package import decoratori
 
+if __name__ == "__main__":
+    import solverBot
+else:
+    from Package import solverBot
 
 #GLOBALS
 
