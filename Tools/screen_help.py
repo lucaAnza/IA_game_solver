@@ -4,6 +4,13 @@ import pyautogui
 import datetime
 import os
 import time
+import cv2
+import sys
+
+
+#Informazioni utili
+
+# Pixel attuale : x = 870, y = 330, height = 490, width = 620
 
 
 #Funzione che esegue uno screenshot
@@ -11,8 +18,10 @@ def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , d
     script_name='screen_help.py'
 
     if(fullScreen):
+        print("fatto Fullscreen!")
         screenshot = pyautogui.screenshot()
     else:
+        print("fatto Screen parziale!")
         screenshot = pyautogui.screenshot(region=(x, y, width, height))
     
     current_directory = os.path.abspath(__file__)
@@ -21,10 +30,6 @@ def take_screenshot( x = 0 , y = 0 , width = 500 , height = 500 , label = "" , d
     screenshot.save(file_path)
     if(debug):
         print(f"Screenshot salvato in: {file_path}")
-        if(fullScreen):
-            print(f"Eseguito fullscreen!")
-        else:
-            print(f"Screen [x={x},y={y}] , Size(H,W) = {height,width}")
     return file_path
 
 
@@ -44,17 +49,33 @@ def analysis_screenshot():
 
 
 
-    
+def click_event(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print(f'\nCoordinate del pixel: ({x}, {y})')
+
+  
 
 
  
 if ( __name__ == '__main__'):        # Controlla se è eseguita direttamente
 
-    attesa = 5
+    attesa = 3
     for i in range(attesa):
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
 
-    take_screenshot(870,330,490,620,debug=True)
+    path = take_screenshot(0,0,300,300,debug=True,fullScreen=True, label='[HELP]')
+    immagine = cv2.imread(path)
+
+    # Verifica che l'immagine sia stata caricata correttamente
+    if immagine is None:
+        print("Errore nel caricamento dell'immagine.")
+        sys.exit()
+
+    # Mostra l'immagine e imposta la funzione di callback del mouse
+    cv2.imshow('Immagine', immagine)
+    cv2.setMouseCallback('Immagine', click_event)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
 
 
