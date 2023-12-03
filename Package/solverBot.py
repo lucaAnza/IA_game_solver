@@ -291,7 +291,10 @@ def scan_matrice(matrice2):
         c = check_adj_row(matrice2[i])  #Ritorna indice di colonna
         if c >= offset:   # condizione stella
             c = c-offset
-            send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
+            if(i == 5):    # Nel caso la stella sia in fondo
+                send_input_gui(dizionario_movimenti[f'M[{i}][{c}] alto'])
+            else:
+                send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
             mossa = True
             break
         elif c != -1:  # condizione di adiacenza sulla riga

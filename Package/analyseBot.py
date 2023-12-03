@@ -5,8 +5,10 @@ import time
 
 if __name__ == "__main__":
     import solverBot
+    import decoratori
 else:
     from Package import solverBot
+    from Package import decoratori
 
 #GLOBALS
 
