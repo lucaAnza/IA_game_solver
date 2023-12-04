@@ -19,20 +19,50 @@ num_colonne = solverBot.num_colonne
 
 
 @decoratori.timestamp_decorator
-def fill_Item_Matrix(string_matrix , int_matrix):
-    found_unknown_item = False
-    for i in range(num_righe):
-        for j in range(num_colonne):
-            res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
-            int_matrix[i].append(analyseBot.default_name[str(res)])
-            if(int(analyseBot.default_name[str(res)]) == 0):
-                found_unknown_item = True
+def fill_Item_Matrix(string_matrix , int_matrix , split_id = 0):
+    
+    half_riga = 2
+
+    if(split_id == 2):   # Caso in cui si voglia calcolare tutta la matrice
+        found_unknown_item = False
+        for i in range(num_righe):
+            for j in range(num_colonne):
+                res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
+                int_matrix[i].append(analyseBot.default_name[str(res)])
+                if(int(analyseBot.default_name[str(res)]) == 0):
+                    found_unknown_item = True
+                    break
+            if(found_unknown_item):
                 break
-        if(found_unknown_item):
-            break
+    elif(split_id == 0):       # Caso in cui si voglia calcolare la prima metà
+        found_unknown_item = False
+        for i in range(num_righe):
+            if(i>half_riga):
+                for j in range(num_colonne):
+                    int_matrix[i].append(-1)
+            else:
+                for j in range(num_colonne):
+                    res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
+                    int_matrix[i].append(analyseBot.default_name[str(res)])
+                    if(int(analyseBot.default_name[str(res)]) == 0):
+                        found_unknown_item = True
+                        break
+                if(found_unknown_item):
+                    break
+    else:                     # Caso in cui si voglia calcolare la seconda metà
+        found_unknown_item = False
+        for i in range(num_righe):
+            if(i>half_riga):
+                for j in range(num_colonne):
+                    res = analyseBot.analizza_immagine(matrix_img[i][j] , debug=False)
+                    int_matrix[i][j] = analyseBot.default_name[str(res)]   # Sostituisce i -1 con gli elementi mancanti
+                    if(int(analyseBot.default_name[str(res)]) == 0):
+                        found_unknown_item = True
+                        break
+                if(found_unknown_item):
+                    break
     
     return found_unknown_item
-
 
     
 #MAIN 
@@ -82,7 +112,9 @@ while(consecutive_error < 100):
     matrix_img = solverBot.matrix_from_img(immagine , 200 , open_img = False)
     matrix_item = [ [] , [] , [] , [] , [] , [] ]
     matrix_number = [ [] , [] , [] , [] , [] , [] ]
-    found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number)
+    
+    
+    found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number , split_id=0)   # Analizza la prima metà
 
 
     """OPTION2
@@ -107,7 +139,7 @@ while(consecutive_error < 100):
 
     if(not(found_unknown_item)):     #Se almeno un elemento non l'ha riconosciuto [ prod == 0] non entra.
         #Debug analisi
-        print(f"\n{Fore.YELLOW}Matrix id_item: ")
+        print(f"\n{Fore.YELLOW}Matrix id_item1: ")
         analyseBot.print_matrix(matrix_number)
         print(f"{Style.RESET_ALL}\n")
         
@@ -116,7 +148,20 @@ while(consecutive_error < 100):
         if(product):   
             print(f'{Fore.GREEN}Check della matrice andato a buon fine!{Style.RESET_ALL}')
             consecutive_error=0
-            solverBot.scan_matrice(matrix_number)
+            esito = solverBot.scan_matrice(matrix_number)
+            if(esito == -1):   # Nel caso non abbia trovato mosse nella prima metà
+                found_unknown_item = fill_Item_Matrix(matrix_item , matrix_number , split_id=1)   # Analizza la prima metà
+                if(not(found_unknown_item)):
+                    print(f"\n{Fore.YELLOW}Matrix id_item2: ")
+                    analyseBot.print_matrix(matrix_number)
+                    print(f"{Style.RESET_ALL}\n")
+                    solverBot.scan_matrice(matrix_number)
+                else:
+                    print(f"\n{Fore.YELLOW}Parzial Matrix id_item[in]:\n{matrix_number}")
+                    print(f'{Fore.RED}Error {consecutive_error} {Style.RESET_ALL}')
+                    consecutive_error+=1
+                
+            
             if( old_product == product):   # check per evitare di essere bloccato in una stessa pagina
                 consecutive_error+=1
             else:

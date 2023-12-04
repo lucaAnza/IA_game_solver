@@ -285,10 +285,12 @@ def check_row_feasibility(i, j, matrice):
 
 
 @decoratori.timestamp_decorator
-def scan_matrice(matrice2):
+def scan_matrice(matrice):
     mossa = False
     for i in range(6):  # controllo per righe
-        c = check_adj_row(matrice2[i])  #Ritorna indice di colonna
+        if(matrice[i][0] == -1):      # Per implementare una logica di ottimizazione delle analisi
+            return -1
+        c = check_adj_row(matrice[i])  #Ritorna indice di colonna
         if c >= offset:   # condizione stella
             c = c-offset
             if(i == 5):    # Nel caso la stella sia in fondo
@@ -301,8 +303,8 @@ def scan_matrice(matrice2):
             print(
                 f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tTrovati due elementi simili nella riga {i} {Style.RESET_ALL}")
             print(f"Indici = [", c, ",", c+1, "] -> ",
-                  matrice2[i][c], " ", matrice2[i][c+1], "\n", f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\tinizio controllo feasibility{Style.RESET_ALL}")
-            move = check_row_feasibility(i, c, matrice2)
+                  matrice[i][c], " ", matrice[i][c+1], "\n", f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\tinizio controllo feasibility{Style.RESET_ALL}")
+            move = check_row_feasibility(i, c, matrice)
             if move and isinstance(move, str):
                 send_input_gui(dizionario_movimenti[move])
                 mossa = True
