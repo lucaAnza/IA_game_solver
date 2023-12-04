@@ -4,9 +4,11 @@ import pyautogui
 import datetime
 import os
 import time
+import decoratori
 
 
 # Funzione che esegue uno screenshot
+@decoratori.timestamp_decorator
 def take_screenshot(x=0, y=0, width=500, height=500, label="", debug=False, fullScreen=False):
     script_name = 'screenBot.py'
 
@@ -30,6 +32,7 @@ def take_screenshot(x=0, y=0, width=500, height=500, label="", debug=False, full
 
 
 # Funzione che salva tante immgini in modo tale da capire la più adatta
+@decoratori.timestamp_decorator
 def analysis_screenshot():
 
     x = 1

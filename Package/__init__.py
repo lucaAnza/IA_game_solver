@@ -1,1 +1,1 @@
-__all__ = [ 'analyseBot' , 'screenBot'  , 'solverBot' , 'decoratori' ] 
+__all__ = ['analyseBot', 'screenBot', 'solverBot', 'decoratori']

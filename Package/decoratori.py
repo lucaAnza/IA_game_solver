@@ -1,6 +1,7 @@
 import functools
 import datetime
 from colorama import Fore, Style
+import print_coloured as p
 
 
 def timestamp_decorator(func):
@@ -10,7 +11,6 @@ def timestamp_decorator(func):
         result = func(*args, **kwargs)
         end_time = datetime.datetime.now()
         exe_time = (end_time - start_time)
-        print(
-            f"{Fore.LIGHTBLUE_EX}Tempo esecuzione {func.__name__}: {exe_time}{Style.RESET_ALL}")
+        p.print_cyan_ts(f"Tempo esecuzione {func.__name__}: {exe_time}")
         return result  # restituisce il risultato della chiamata originale
     return wrapper
