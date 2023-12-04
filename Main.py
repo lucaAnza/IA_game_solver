@@ -7,6 +7,7 @@ import os
 from colorama import Fore, Style
 import pyfiglet
 from Package import *
+import tracemalloc
 
 
 
@@ -64,6 +65,22 @@ def fill_Item_Matrix(string_matrix , int_matrix , split_id = 0):
     
     return found_unknown_item
 
+
+
+
+
+def memory_stats(action = "None"):
+    
+    MB = 1048576
+
+    if(action == "Start"):
+        tracemalloc.start()
+    if(action == "Stop"):
+        tracemalloc.stop()
+    if(action == "Print"):
+        current,peak = tracemalloc.get_traced_memory()                 
+        print(f"Istantanea = {int(current/MB)}Mb  ( {current}B )\n-----Picco = {int(peak/MB)}Mb  ( {peak}B )"  ) 
+
     
 #MAIN 
 print("\n\n")
@@ -82,6 +99,7 @@ print("Starting...")
 time.sleep(2)
 
 
+memory_stats("Start")
 consecutive_error = 0
 general_counter = 0
 old_product = 0
@@ -181,6 +199,12 @@ while(consecutive_error < 100):
     print(f"{Fore.CYAN}Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}")
     print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}\n\n")
     general_counter+=1
+
+    if(general_counter%10 == 0 ):     # Controllo memoria
+        memory_stats("Print")
+
+
+memory_stats("Stop")
 
 
 
