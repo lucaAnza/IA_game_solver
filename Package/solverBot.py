@@ -316,13 +316,13 @@ def scan_matrice(matrice):
                 f"{Fore.RED} Nessun elemento adiacente nella riga: {i}\n{Style.RESET_ALL}")
     if mossa != True:
         for j in range(5):  # controllo per colonne
-            riga_index = check_adj_column(matrice2, j)
+            riga_index = check_adj_column(matrice, j)
             if riga_index != -1:  # condizione di adiacenza
                 print(
                     f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Trovati due elementi simili nella colonna: {j}\n{Style.RESET_ALL}")
                 print(
-                    f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tIndici = [{riga_index},{riga_index+1}] -> {matrice2[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
-                move2 = check_column_feasibility(riga_index, j, matrice2)
+                    f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tIndici = [{riga_index},{riga_index+1}] -> {matrice[riga_index][j]} {matrice2[riga_index][j]} {Style.RESET_ALL}")
+                move2 = check_column_feasibility(riga_index, j, matrice)
                 if move2 and isinstance(move2, str):
                     send_input_gui(dizionario_movimenti[move2])
                     break
