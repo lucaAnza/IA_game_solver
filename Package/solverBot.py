@@ -12,12 +12,11 @@ else:
     from Package import decoratori
 
 
+# Setting
+os.system("color")  # abilita i colori nella shell
 
-#Setting    
-os.system("color") #abilita i colori nella shell
 
-
-#Global
+# Global
 delay_keyPress_single = 0.04
 delay_keyPress_combo = 0.01
 num_righe = 6
@@ -26,9 +25,6 @@ offset = 100
 
 
 # {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
-
-
-
 
 
 matrice = [
@@ -168,14 +164,14 @@ def send_input_gui(string):
     if c2 != '':  # se si usa CTRL o ALT come opzione
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \tPressed key: {c1}+{c2} {Style.RESET_ALL}")
-        pyautogui.hotkey(c1, c2 , interval=delay_keyPress_combo)
+        pyautogui.hotkey(c1, c2, interval=delay_keyPress_combo)
     else:
         print(
             f"{Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t Pressed key: {c1} {Style.RESET_ALL}")
-        pyautogui.press(c1 , interval=delay_keyPress_single)
+        pyautogui.press(c1, interval=delay_keyPress_single)
 
 
-#Funzione che ritorna l'indice di colonna del primo elemento di una successione di 2
+# Funzione che ritorna l'indice di colonna del primo elemento di una successione di 2
 @decoratori.timestamp_decorator
 def check_adj_row(l):
     for i in range(len(l)):  # range 0-4
@@ -188,6 +184,7 @@ def check_adj_row(l):
         else:
             if l[i] == l[i+1]:
                 return i
+
 
 @decoratori.timestamp_decorator
 def check_adj_column(M, j):
@@ -217,6 +214,7 @@ def valid_col_bound(i):
     print(
         f"{Fore.RED}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]}\t(((Elemento out of bounds[i = {i}]))){Style.RESET_ALL}")
     return False
+
 
 @decoratori.timestamp_decorator
 def check_column_feasibility(i, j, matrice):
@@ -250,7 +248,6 @@ def check_column_feasibility(i, j, matrice):
     return False
 
 
-
 @decoratori.timestamp_decorator
 def check_row_feasibility(i, j, matrice):
     el1 = matrice[i][j]
@@ -282,18 +279,16 @@ def check_row_feasibility(i, j, matrice):
     return False
 
 
-
-
 @decoratori.timestamp_decorator
 def scan_matrice(matrice):
     mossa = False
     for i in range(6):  # controllo per righe
-        if(matrice[i][0] == -1):      # Per implementare una logica di ottimizazione delle analisi
+        if (matrice[i][0] == -1):      # Per implementare una logica di ottimizazione delle analisi
             return -1
-        c = check_adj_row(matrice[i])  #Ritorna indice di colonna
+        c = check_adj_row(matrice[i])  # Ritorna indice di colonna
         if c >= offset:   # condizione stella
             c = c-offset
-            if(i == 5):    # Nel caso la stella sia in fondo
+            if (i == 5):    # Nel caso la stella sia in fondo
                 send_input_gui(dizionario_movimenti[f'M[{i}][{c}] alto'])
             else:
                 send_input_gui(dizionario_movimenti[f'M[{i}][{c}] basso'])
@@ -333,10 +328,9 @@ def scan_matrice(matrice):
 
 
 # Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
-def matrix_from_img(img, delay = 200 , open_img = False):
+def matrix_from_img(img, delay=200, open_img=False):
     # Dimnensione immagine
     altezza_immagine, larghezza_immagine, _ = img.shape
-
 
     # Calcola le dimensioni delle celle nella tua nuova griglia
     larghezza_cella = larghezza_immagine // num_colonne
@@ -352,7 +346,6 @@ def matrix_from_img(img, delay = 200 , open_img = False):
         [],
         []
     ]
-
 
     for riga in range(num_righe):
         for colonna in range(num_colonne):
@@ -371,12 +364,12 @@ def matrix_from_img(img, delay = 200 , open_img = False):
             # cv2.waitKey(2000)
             matrice_immagini[riga].append(cell_img)
 
-    if ( open_img ):
+    if (open_img):
         cont = 1
         for i in range(num_righe):
             for j in range(num_colonne):
                 cv2.imshow(f"Immagine {cont}",
-                        matrice_immagini[i][j])
+                           matrice_immagini[i][j])
                 cv2.waitKey(delay)
                 cont += 1
         cv2.destroyAllWindows()
@@ -384,12 +377,6 @@ def matrix_from_img(img, delay = 200 , open_img = False):
     return matrice_immagini
 
 
-
-
-
-#MAIN
-
+# MAIN
 if (__name__ == '__main__'):
     scan_matrice(matrice)
-
-    
