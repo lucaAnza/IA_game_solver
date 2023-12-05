@@ -1,16 +1,15 @@
 import pyautogui
 from colorama import Fore, Style
-import functools
-import datetime
 import os
 import cv2
-import print_coloured as p
 
 if __name__ == "__main__" or __name__ == 'solverBot':
     import decoratori
+    import print_coloured as p
 else:
-    print(__name__)
+
     from Package import decoratori
+    from Package import print_coloured as p
 
 
 # Setting

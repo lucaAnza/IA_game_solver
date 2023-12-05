@@ -1,7 +1,13 @@
 import functools
 import datetime
 from colorama import Fore, Style
-import print_coloured as p
+
+
+if __name__ == "__main__" or __name__ == 'decoratori':
+    import print_coloured as p
+else:
+    print(__name__)
+    from Package import print_coloured as p
 
 
 def timestamp_decorator(func):

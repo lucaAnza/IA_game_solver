@@ -1,10 +1,15 @@
 import pyautogui
 import time
 import pyautogui
-import datetime
 import os
 import time
-import decoratori
+
+
+if __name__ == "__main__" or __name__ == 'screenBot':
+    import decoratori
+else:
+    print(__name__)
+    from Package import decoratori
 
 
 # Funzione che esegue uno screenshot
