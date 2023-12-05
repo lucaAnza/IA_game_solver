@@ -116,7 +116,8 @@ while (consecutive_error < 100):
 
     # Cattura screenshot
     label = 'kz32'
-    screenBot.take_screenshot(870, 330, 490, 620, label)
+    # pc lucas     screenBot.take_screenshot(870, 330, 490, 620, label)
+    screenBot.take_screenshot(866,333,501,627, label)
     img_name = f"Screenshot/screenshot{label}.png"
     immagine = cv2.imread(img_name)
     if immagine is None:

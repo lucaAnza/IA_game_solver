@@ -66,8 +66,8 @@ if ( __name__ == '__main__'):        # Controlla se è eseguita direttamente
     for i in range(attesa):
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
-
-    path = take_screenshot(886,360,455,546,debug=True,fullScreen=False, label='[HELP]')
+    #x = 870, y = 330, height s= 490, width = 620
+    path = take_screenshot(866,333,501,627,debug=True,fullScreen=False, label='[HELP]')
     immagine = cv2.imread(path)
 
     # Verifica che l'immagine sia stata caricata correttamente
