@@ -26,7 +26,7 @@ offset = 100
 # {Fore.GREEN}{datetime.datetime.now().strftime('%H:%M:%S:%f')[:-3]} \t
 # 6a
 
-matrice = [
+mm1 = [
     [1, 2, 3, 3, 5],
     [2, 1, 1, 5, 5],
     [5, 5, 3, 2, 1],
@@ -35,7 +35,7 @@ matrice = [
     [5, 5, 3, 1, 5]
 ]
 
-matrice2 = [
+mm2 = [
     [0, 1, 3, 4, 5],
     [4, 3, 2, 1, 4],
     [1, 2, 3, 4, 5],
@@ -373,4 +373,4 @@ def matrix_from_img(img, delay=200, open_img=False):
 
 # MAIN
 if (__name__ == '__main__'):
-    scan_matrice(matrice)
+    scan_matrice(mm1)
