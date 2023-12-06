@@ -11,3 +11,5 @@ c3 = 'a'
 pyautogui.press(c3, interval=0.04)
 end_time = time.time()
 print(f"{Fore.YELLOW}Tempo impiegato: {end_time - start_time} secondi{Style.RESET_ALL}")
+
+print("merge")
