@@ -1,12 +1,12 @@
-Using AI to autosolve a game hosted on a Windows machine
+Automating the solution of a game hosted on a Windows machine
 
 # MAIN-STEPS
 
-## 1. Screen capture
+## 1. Implemenet image processor
 
-pyautogui library
+Using adequate libraries implement a processor able to distinguish between different shapes
 
-## 2. Image processing
+## 2. Matrix of image items
 
 OpenCV
 
@@ -17,8 +17,6 @@ Standard library
 ## 4. Automation
 
 Use Bluestack's macros
-
-
 
 # STEPS
 
