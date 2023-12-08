@@ -276,8 +276,6 @@ def check_row_feasibility(i, j, matrice):
 def scan_matrice(matrice):
     mossa = False
     for i in range(6):  # controllo per righe
-        if (matrice[i][0] == -1):      # Per implementare una logica di ottimizazione delle analisi
-            return -1
         c = check_adj_row(matrice[i])  # Ritorna indice di colonna
         if c >= offset:   # condizione stella
             c = c-offset
@@ -319,9 +317,9 @@ def scan_matrice(matrice):
             else:
                 p.print_red_ts(f"Nessun elemento adiacente nella colonna: {j}")
 
+
+
 # Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
-
-
 def matrix_from_img(img, delay=200, open_img=False):
     # Dimnensione immagine
     altezza_immagine, larghezza_immagine, _ = img.shape

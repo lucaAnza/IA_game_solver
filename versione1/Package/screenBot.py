@@ -3,13 +3,29 @@ import time
 import pyautogui
 import os
 import time
-
+import cv2
 
 if __name__ == "__main__" or __name__ == 'screenBot':
     import decoratori
 else:
-    print(__name__)
     from Package import decoratori
+
+
+# Item : (x,y) , (b , g , r)        ->  rosso =  (130,106,237)     , grigio = (130,106,237)
+dict_item = {
+    'star': ( (5,-3) , (74,205,247) ) ,
+    'hat': ( (-16,21) , (130,106,237) ) ,
+    'iced_hat': ( (-18,18) , (186,150,189) ) ,
+    'skate': ( (-10,10) , (173,147,170) ) ,
+    'iced_skate': ( (-10,7) , (210,172,155) ) ,
+    'pizza': ( (-10,7) , (255,255,255) ) ,
+    'iced_pizza': ( (-10,7) , (246,225,205) ) ,
+    'can': ( (5,-3) , (130,106,237) ) ,
+    'iced_can': ( (19,3) , (228,207,184) ) ,
+    'Unknown_Item': ( (1,1) , (0,0,0) ) 
+}
+
+
 
 
 # Funzione che esegue uno screenshot
@@ -36,19 +52,88 @@ def take_screenshot(x=0, y=0, width=500, height=500, label="", debug=False, full
     return file_path
 
 
-# Funzione che salva tante immgini in modo tale da capire la più adatta
-@decoratori.timestamp_decorator
-def analysis_screenshot():
+def click_event(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print(f'\nCoordinate del pixel: ({x}, {y})')
 
-    x = 1
-    y = 1
-    moltiplicatore = 300
-    for i in range(3):
-        for j in range(3):
-            x = moltiplicatore * i
-            y = moltiplicatore * j
-            print(f"screen x = {x}, y = {y} : {i}{j}")
-            take_screenshot(x, y, label=f'{i}{j}')
+
+def which_object( immagine ,  x = 0 , y = 0):
+
+    # Key = hat,pizza,...       Item = (x,y) (b,g,r)
+    for key, value in dict_item.items():
+        x_try = x + value[0][0]
+        y_try = y + value[0][1]
+        pixel = immagine[y_try , x_try]
+
+        if(pixel[0] == value[1][0] and pixel[1] == value[1][1] and pixel[2] == value[1][2]):
+            #print(key , " pixel = " , pixel , " value = " , value)
+            return key
+    
+    return "Unknown_Item"
+
+
+#Funzione che crea una grigliata formata di quadrati con lato "square_side". Se gli viene passata una matrice ritorna una matrice
+# con ogni elemento uguale ai colori RGB del centro di ogni sotto-quadrato.
+def set_grill(immagine , top_left = (0,0) , square_side = 40 , righe = 6 , colonne = 5 , matrix  = False):
+    
+    if(matrix == True) :     # Caso in cui ti aspetti che torna una matrice di item
+        matrix = [ [] , [] , [] , [] , [] , [] ]
+        color_square = (0, 0, 255)  # Colore in formato BGR (rosso)
+        color_dot = ( 255 , 0 , 0)
+        thickness_square = 2
+        thickness_dot = 1
+
+        # Creazione griglia
+        top_lx = top_left
+        bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )
+        x_centro = (top_lx[0] + bot_rx[0]) // 2
+        y_centro = (top_lx[1] + bot_rx[1]) // 2
+        for i in range(righe):
+            for j in range(colonne):
+                cv2.rectangle(immagine, top_lx, bot_rx, color_square, thickness_square)
+                cv2.rectangle(immagine, (x_centro, y_centro) , (x_centro, y_centro), color_dot  , thickness_dot)
+        
+                matrix[i].append(which_object(immagine , x_centro , y_centro))
+                
+                top_lx = (top_lx[0]+square_side , top_lx[1] )    # slide top_left  x ----> x2 -----> xn
+                bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )   # adattamento bottom_right
+                x_centro = (top_lx[0] + bot_rx[0]) // 2
+                y_centro = (top_lx[1] + bot_rx[1]) // 2
+                
+            top_lx = (top_left[0] , top_lx[1]+square_side )           # slide top_left   y 
+            bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )      # adattamento bottom_right
+            x_centro = (top_lx[0] + bot_rx[0]) // 2
+            y_centro = (top_lx[1] + bot_rx[1]) // 2
+        
+        
+        return matrix
+    else:
+        print("Matrice non settata! [ Debug mode active ]")
+        color_square = (0, 0, 255)  # Colore in formato BGR (rosso)
+        color_dot = ( 255 , 0 , 0)
+        thickness_square = 2
+        thickness_dot = 1
+
+        # Creazione griglia
+        top_lx = top_left
+        bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )
+        x_centro = (top_lx[0] + bot_rx[0]) // 2
+        y_centro = (top_lx[1] + bot_rx[1]) // 2
+        for i in range(righe):
+            for j in range(colonne):
+                cv2.rectangle(immagine, top_lx, bot_rx, color_square, thickness_square)
+                print(f'point pixel -> [{i,j}] - [x={x_centro},y={y_centro}] {immagine[y_centro,x_centro]}')
+                cv2.rectangle(immagine, (x_centro, y_centro) , (x_centro, y_centro),color_dot  , thickness_dot)
+                top_lx = (top_lx[0]+square_side , top_lx[1] )    # slide top_left  x ----> x2 -----> xn
+                bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )   # adattamento bottom_right
+                x_centro = (top_lx[0] + bot_rx[0]) // 2
+                y_centro = (top_lx[1] + bot_rx[1]) // 2
+            
+            top_lx = (top_left[0] , top_lx[1]+square_side )           # slide top_left   y 
+            bot_rx = (top_lx[0] + square_side , top_lx[1] + square_side )      # adattamento bottom_right
+            x_centro = (top_lx[0] + bot_rx[0]) // 2
+            y_centro = (top_lx[1] + bot_rx[1]) // 2
+    
 
 
 if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
@@ -58,4 +143,7 @@ if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
 
-    take_screenshot(870, 330, 490, 620, debug=True)
+    
+    for j in range(5):
+        #take_screenshot(870, 330, 490, 620, debug=True)
+        take_screenshot(870, 330, 490, 620,label=f'-{j}-')

@@ -6,7 +6,6 @@ from colorama import Fore, Style
 if __name__ == "__main__" or __name__ == 'decoratori':
     import print_coloured as p
 else:
-    print(__name__)
     from Package import print_coloured as p
 
 
