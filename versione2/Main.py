@@ -59,7 +59,8 @@ while (consecutive_error < 100):
     print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}")
     start_time = datetime.datetime.now()  # debugging tempo
 
-    time.sleep(3)
+
+    time.sleep(0.3)  # Ossigeno al processore
 
     # Cattura screenshot
     label = 'kz32'
