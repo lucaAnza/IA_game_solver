@@ -60,7 +60,7 @@ while (consecutive_error < 100):
     start_time = datetime.datetime.now()  # debugging tempo
 
 
-    time.sleep(0.3)  # Ossigeno al processore
+    time.sleep(0.8)  # Ossigeno al processore
 
     # Cattura screenshot
     label = 'kz32'
