@@ -8,7 +8,7 @@ from colorama import Fore, Style
 import pyfiglet
 from Package import *
 import tracemalloc
-# batel
+
 
 # Setting
 os.system("color")  # abilita i colori nella shell
