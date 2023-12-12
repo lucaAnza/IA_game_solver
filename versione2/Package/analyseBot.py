@@ -60,12 +60,12 @@ def checkMatrixProduct(matrix):
 
 # Data un immagine restituisce la matrice degli item
 @decoratori.timestamp_decorator
-def get_matrix_item(immagine , type = "String" ,debug = False):
+def get_matrix_item(immagine , type = "String" ,debug = False, x=5, y=20, side=93):
 
     m_string = [ [] , [] , [] , [] , [] , [] ]
     m_number = [ [] , [] , [] , [] , [] , [] ]
     
-    m_string = screenBot.set_grill(immagine , (5,20) , square_side=93 , matrix=True)
+    m_string = screenBot.set_grill(immagine , (x,y) , square_side=side , matrix=True)
     
     #cv2.imwrite("Screenshot/output_paint.png" , immagine)   Stampa la matrice con la griglia
 
@@ -99,7 +99,7 @@ if (__name__ == "__main__"):
     inizio = time.time()
 
 
-    nome_file_immagine = "Screenshot/Example1.png"
+    nome_file_immagine = "./Tools/output.png"
     
     
     immagine = cv2.imread(nome_file_immagine)
@@ -110,8 +110,9 @@ if (__name__ == "__main__"):
         current_directory = os.path.abspath(__file__)
         print(f'Directory corrente : {current_directory}')
         sys.exit()
-
-    matrix_string = get_matrix_item(immagine , type="Number")
+        
+    #nel caso lo script lo esegue luca cambiare parametri x y e side 
+    matrix_string = get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)
     
     print_matrix(matrix_string)
 

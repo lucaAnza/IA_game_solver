@@ -63,8 +63,9 @@ while (consecutive_error < 100):
     time.sleep(0.8)  # Ossigeno al processore
 
     # Cattura screenshot
-    label = 'kz32'
+    label = f'kz32'
     
+    #screenBot.take_screenshot(870, 330, 490, 620, f"full_{general_counter}" , fullScreen=True)
     screenBot.take_screenshot(870, 330, 490, 620, label)      # Screenshot pc-luca
     # screenBot.take_screenshot(866,333,501,627, label)      # Screenshot pc-chri
 
@@ -73,8 +74,11 @@ while (consecutive_error < 100):
     if immagine is None:
         print("Errore nel caricamento dell'immagine.")
         sys.exit()
-
-    matrix_number = analyseBot.get_matrix_item(immagine , type = "Number")
+    
+    # matrix_number = analyseBot.get_matrix_item(immagine , type = "Number")    Per luca pc
+    #nel caso lo script lo esegue luca cambiare parametri x y e side 
+    
+    matrix_number = analyseBot.get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   
 
     
     # Se almeno un elemento non l'ha riconosciuto [ prod == 0] non entra.

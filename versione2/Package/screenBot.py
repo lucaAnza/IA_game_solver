@@ -144,6 +144,8 @@ if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
         time.sleep(1)
 
     
-    for j in range(5):
+    for j in range(1):
         #take_screenshot(870, 330, 490, 620, debug=True)
-        take_screenshot(870, 330, 490, 620,label=f'-{j}-')
+        time.sleep(2)
+        take_screenshot(870, 330, 490, 620,label=f'-{j}cut-')
+        

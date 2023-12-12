@@ -112,8 +112,8 @@ if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
     # path = take_screenshot(866,333,501,627,debug=True,fullScreen=False, label='[HELP]')
     # immagine = cv2.imread(path)
 
-    immagine = cv2.imread("test_img.png")
-    set_grill(immagine, (5, 20), square_side=93)
+    immagine = cv2.imread("../Screenshot/screenshotkz323.png")
+    set_grill(immagine, (9, 23), square_side=94)    # cambiare per pc luca
     cv2.imwrite("output.png", immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
