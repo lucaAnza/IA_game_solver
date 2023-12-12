@@ -72,6 +72,16 @@ mm5 = [
     [7, 3, 7, 3, 7]
 ]
 
+
+mm6 = [
+    [4, 3, 1, 1, 2],
+    [1, 2, 4, 4, 3],
+    [4, 3, 1, 3, 1],
+    [2, 3, 1, 2, 3],
+    [1, 4, 3, 4, 1],
+    [4, 3, 4, 3, 4]
+]
+
 dizionario_movimenti = {
     # R0
     'M[0][0] basso': 'a+',
@@ -433,6 +443,7 @@ def scan_matrice(matrice):
                         p.print_magenta_ts("pass!")
                         send_input_gui(dizionario_movimenti[move2])
                         exit = True
+                        mossa = True
                         break
                     print()
             else:
@@ -542,4 +553,4 @@ def matrix_from_img(img, delay=200, open_img=False):
 
 # MAIN
 if (__name__ == '__main__'):
-    scan_matrice(mm5)
+    scan_matrice(mm6)
