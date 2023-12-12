@@ -54,6 +54,34 @@ mm3 = [
 ]
 
 
+mm4 = [
+    [6, 4, 3, 2, 1],
+    [1, 2, 0, 4, 6],
+    [6, 4, 3, 2, 1],
+    [1, 2, 0, 4, 6],
+    [6, 9, 3, 6, 1],
+    [1, 2, 0, 4, 6]
+]
+
+mm5 = [
+    [1, 0, 1, 0, 1],
+    [2, 9, 2, 9, 2],
+    [3, 0, 3, 0, 3],
+    [4, 1, 4, 3, 4],
+    [6, 2, 6, 2, 6],
+    [7, 3, 7, 3, 7]
+]
+
+
+mm6 = [
+    [4, 3, 1, 1, 2],
+    [1, 2, 4, 4, 3],
+    [4, 3, 1, 3, 1],
+    [2, 3, 1, 2, 3],
+    [1, 4, 3, 4, 1],
+    [4, 3, 4, 3, 4]
+]
+
 dizionario_movimenti = {
     # R0
     'M[0][0] basso': 'a+',
@@ -196,7 +224,8 @@ def check_adj_row2(l):
         if (i == 4):
             break
         elif l[i] == 5:  # stella
-            temp_adj.append(-1)     # Per fare in modo che esista sempre un elemento temp_adj[0]
+            # Per fare in modo che esista sempre un elemento temp_adj[0]
+            temp_adj.append(-1)
             temp_adj[0] = i+offset
             return temp_adj
         else:
@@ -308,6 +337,49 @@ def check_row_feasibility(i, j, matrice):
     return False
 
 
+def check_hop_adj_row(l):
+    temp_hops = []
+    for i in range(len(l)):
+        if (i == 3):
+            break
+        elif l[i] == l[i+2]:
+            temp_hops.append(i)
+    return temp_hops
+
+
+def check_hop_adj_col(M, j):
+    temp_hops = []
+    for i in range(6):
+        if (i == 4):
+            break
+        else:
+            if M[i][j] == M[i+2][j]:
+                temp_hops.append(i)
+    return temp_hops
+
+
+def check_hop_row_feasibility(i, j, M):
+    el1 = M[i][j]
+    # controllo superiore:
+    if ((valid_bound(i-1, j+1)) and (M[i-1][j+1] == el1)):
+        return (f"M[{i-1}][{j+1}] basso")
+    elif ((valid_bound(i+1, j+1)) and (M[i+1][j+1] == el1)):
+        return (f"M[{i+1}][{j+1}] alto")
+
+    p.print_red_ts(f"Nessuna mossa valida trovata per hop M[{i}][{j}]\n")
+    return False
+
+
+def check_hop_column_feasibility(i, j, M):
+    el1 = M[i][j]
+    if ((valid_bound(i+1, j-1)) and (M[i+1][j-1] == el1)):
+        return (f"M[{i+1}][{j-1}] dx")
+    elif ((valid_bound(i+1, j+1)) and (M[i+1][j+1] == el1)):
+        return (f"M[{i+1}][{j+1}] sx")
+    p.print_red_ts(f"Nessuna mossa valida trovata per hop M[{i}][{j}]\n")
+    return False
+
+
 @decoratori.timestamp_decorator
 def scan_matrice(matrice):
     mossa = False
@@ -317,7 +389,6 @@ def scan_matrice(matrice):
         #### LOGICA CON LISTA DI INDICI:####
 
         l_adj = check_adj_row2(matrice[i])  # Ritorna indice di colonna
-
 
         if len(l_adj) == 0:
             p.print_red_ts(f"Nessun elemento adiacente nella riga: {i}\n")
@@ -338,7 +409,7 @@ def scan_matrice(matrice):
             p.print_magenta_ts(f"Inizio controllo feasibility <Row {i}>")
 
             # CONTROLLO RIGA
-
+            # ciclo per iterare gli indici con adiacenze
             for k in range(len(l_adj)):
                 p.print_green_ts(f"Controllo coppia adiacente n.{k+1}")
                 move = check_row_feasibility(i, l_adj[k], matrice)
@@ -350,8 +421,8 @@ def scan_matrice(matrice):
                 print()
         # condizione no adiacenza della riga
         else:
-            p.print_red_ts(f"Errore non determinato -> check SolverBot.scan_matrice() \n")
-            
+            p.print_red_ts(
+                f"Errore non determinato -> check SolverBot.scan_matrice() \n")
 
     # CONTROLLO COLONNE
     exit = False
@@ -372,10 +443,61 @@ def scan_matrice(matrice):
                         p.print_magenta_ts("pass!")
                         send_input_gui(dizionario_movimenti[move2])
                         exit = True
+                        mossa = True
                         break
                     print()
             else:
                 p.print_red_ts(f"Nessun elemento adiacente nella colonna: {j}")
+
+    if mossa != True:
+        p.print_cyan_ts(
+            f"Nessuna soluzione trovata per adiacenze... Inizio controllo by hop")
+        # CONTROLLO HOP ORIZZONTALI
+        for i in range(6):
+            if mossa == True:
+                break
+            hops_or = check_hop_adj_row(matrice[i])
+            if len(hops_or) == 0:
+                p.print_red_ts(f"Nessun hop nella riga {i}")
+                continue
+            # hop trovato!
+            else:
+                p.print_green_ts(f"Trovati due hop nella riga {i}")
+                p.print_magenta_ts(f"Inzio controllo feasibility <Row {i}>")
+                for k in range(len(hops_or)):
+                    p.print_green_ts(f"Controllo hop n.{k+1}")
+                    move = check_hop_row_feasibility(i, hops_or[k], matrice)
+                    if move and isinstance(move, str):
+                        p.print_magenta_ts("pass!")
+                        send_input_gui(dizionario_movimenti[move])
+                        mossa = True
+                        break
+
+        # CONTROLLO HOP VERTICALI
+        if mossa != True:
+            p.print_magenta_ts("    -->>Controllo hop colonne<<-- \n")
+            for j in range(5):
+                if mossa == True:
+                    break
+                hops_vert = check_hop_adj_col(matrice, j)
+                if len(hops_vert) == 0:
+                    p.print_red_ts(f"Nessun hop nella colonna {j}")
+                    continue
+                else:
+                    p.print_green_ts(f"Trovati due hop nella colonna {j}")
+
+                    for k in range(len(hops_vert)):
+                        p.print_green_ts(f"Controllo coppia adiacenze n.{k+1}")
+                        move2 = check_hop_column_feasibility(
+                            hops_vert[k], j, matrice)
+                        if move2 and isinstance(move2, str):
+                            p.print_magenta_ts("pass!")
+                            send_input_gui(dizionario_movimenti[move2])
+                            mossa = True
+                            break
+        if mossa != True:
+            p.print_red_ts("NESSUNA MOSSA VALIDA ---> CHECK: scan_matrice\n")
+
 
 # Funzione che passata un img aperta con opencv2, restituisce una matrice di immagini ritagliate
 
@@ -431,4 +553,4 @@ def matrix_from_img(img, delay=200, open_img=False):
 
 # MAIN
 if (__name__ == '__main__'):
-    scan_matrice(mm3)
+    scan_matrice(mm6)
