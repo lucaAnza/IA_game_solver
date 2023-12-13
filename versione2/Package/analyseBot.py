@@ -46,9 +46,9 @@ def print_matrix(matrix):
             print(str(matrix[i][j]), end=" ")
         print()
 
+
+
 # True -> matrice senza unknown elements   False -> matrice con elementi sconosciuti
-
-
 def checkMatrixProduct(matrix):
 
     prod = 1
@@ -93,15 +93,12 @@ def get_matrix_item(immagine , type = "String" ,debug = False, x=5, y=20, side=9
 
 
 # MAIN
-
 if (__name__ == "__main__"):
 
     inizio = time.time()
 
 
     nome_file_immagine = "./Tools/output.png"
-    
-    
     immagine = cv2.imread(nome_file_immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
@@ -111,10 +108,11 @@ if (__name__ == "__main__"):
         print(f'Directory corrente : {current_directory}')
         sys.exit()
         
-    #nel caso lo script lo esegue luca cambiare parametri x y e side 
-    matrix_string = get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)
     
-    print_matrix(matrix_string)
+    matrix_number = get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)   # Lucas-pc
+    #matrix_number = get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   # Chris-pc
+    
+    print_matrix(matrix_number)
 
     script_name = sys.argv[0]
     fine = time.time()

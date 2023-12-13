@@ -52,11 +52,15 @@ def take_screenshot(x=0, y=0, width=500, height=500, label="", debug=False, full
     return file_path
 
 
+
+# Ritorna le coordinate del pixel cliccato
 def click_event(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         print(f'\nCoordinate del pixel: ({x}, {y})')
 
 
+
+# Funzione che dato un pixel ti dice che item rappresenta
 def which_object( immagine ,  x = 0 , y = 0):
 
     # Key = hat,pizza,...       Item = (x,y) (b,g,r)
@@ -136,7 +140,10 @@ def set_grill(immagine , top_left = (0,0) , square_side = 40 , righe = 6 , colon
     
 
 
-if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
+
+
+#Script che esegue n screen, tra uno screen e l'altro attende k secondi.
+if (__name__ == '__main__'):        
 
     attesa = 5
     for i in range(attesa):
@@ -145,7 +152,6 @@ if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
 
     
     for j in range(1):
-        #take_screenshot(870, 330, 490, 620, debug=True)
         time.sleep(2)
         take_screenshot(870, 330, 490, 620,label=f'-{j}cut-')
         

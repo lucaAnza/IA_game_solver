@@ -65,9 +65,7 @@ while (consecutive_error < 100):
     # Cattura screenshot
     label = f'kz32'
     
-    #screenBot.take_screenshot(870, 330, 490, 620, f"full_{general_counter}" , fullScreen=True)
-    screenBot.take_screenshot(870, 330, 490, 620, label)      # Screenshot pc-luca
-    # screenBot.take_screenshot(866,333,501,627, label)      # Screenshot pc-chri
+    screenBot.take_screenshot(870, 330, 490, 620, label)      
 
     img_name = f"Screenshot/screenshot{label}.png"
     immagine = cv2.imread(img_name)
@@ -75,10 +73,9 @@ while (consecutive_error < 100):
         print("Errore nel caricamento dell'immagine.")
         sys.exit()
     
-    # matrix_number = analyseBot.get_matrix_item(immagine , type = "Number")    Per luca pc
-    #nel caso lo script lo esegue luca cambiare parametri x y e side 
     
-    matrix_number = analyseBot.get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   
+    matrix_number = analyseBot.get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)   # Lucas-pc
+    #matrix_number = analyseBot.get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   # Chris-pc 
 
     
     # Se almeno un elemento non l'ha riconosciuto [ prod == 0] non entra.
@@ -101,14 +98,21 @@ while (consecutive_error < 100):
         print(f"{Style.RESET_ALL}\n")
         consecutive_error += 1
 
+    
     end_time = datetime.datetime.now()
     exe_time = end_time-start_time
     print(f"{Fore.CYAN}Tempo esecuzione WHILE : {exe_time}{Style.RESET_ALL}")
     print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}\n\n")
     general_counter += 1
 
-    if (general_counter % 10 == 0):     # Controllo memoria
+    
+    
+    
+    # Controlli ogni tot cicli
+    
+    if (general_counter % 500 == 0):     # Controllo memoria 
         memory_stats("Print")
+
 
 
 memory_stats("Stop")
