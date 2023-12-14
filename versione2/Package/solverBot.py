@@ -314,8 +314,8 @@ def check_row_feasibility(i, j, matrice):
     if (valid_bound(i, j-2) and (matrice[i][j-2] == el1)):
         return (f"M[{i}][{j-2}] dx")
 
-    elif (valid_bound(i, j+2) and (matrice[i][j+2] == el2)):
-        return (f"M[{i}][{j+2}] sx")
+    elif (valid_bound(i, j+3) and (matrice[i][j+3] == el2)):
+        return (f"M[{i}][{j+3}] sx")
 
     # controllo elementi di sinistra:
     elif (valid_bound(i-1, j-1) and (matrice[i-1][j-1] == el1)):

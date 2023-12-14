@@ -98,7 +98,7 @@ if (__name__ == "__main__"):
     inizio = time.time()
 
 
-    nome_file_immagine = "./Tools/output.png"
+    nome_file_immagine = "../Tools/screenshotkz32.png"
     immagine = cv2.imread(nome_file_immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
@@ -109,8 +109,9 @@ if (__name__ == "__main__"):
         sys.exit()
         
     
-    matrix_number = get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)   # Lucas-pc
+    #matrix_number = get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)   # Lucas-pc
     #matrix_number = get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   # Chris-pc
+    matrix_number = get_matrix_item(immagine , type="Number" , x = 6 , y = 23 , side = 94) 
     
     print_matrix(matrix_number)
 
