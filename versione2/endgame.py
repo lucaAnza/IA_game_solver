@@ -6,4 +6,3 @@ while True:
     pyautogui.press('a')
 
 
-aa

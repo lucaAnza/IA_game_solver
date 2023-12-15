@@ -11,6 +11,37 @@ import tracemalloc
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 webhook_url = "https://discord.com/api/webhooks/1184788603470090320/jqkYHRC-y7P920AYLdB1e08g1WPLWzIcelEssk1tG23VXXE2kvgsNUQUhg5q7fYZ86hU"
+luke_webhook = "https://discord.com/api/webhooks/1184915602431823944/3HyIjU1u40NnJUVpzzfBAEOAHZ9EZkiUwEeViffQLOxUwLpU25-dRR0-LJlx2snXbdsH"
+
+def check_error():
+    print_coloured.print_cyan_ts("Possibile conflitto trovato... going to sleep")
+    #webhook in caso di terminazione / soluzione momentanea 
+    webhook = DiscordWebhook(url=webhook_url)
+    embed = DiscordEmbed(title="Intervento",
+                     description="Situazione di stallo, going to sleep", color="ff0000")
+    embed.set_author(name="Ferrets")
+    embed.set_footer(text="TCP?")
+    embed.set_timestamp()
+    webhook.add_embed(embed)
+    response = webhook.execute()     
+    time.sleep(8)
+    command = 'alt+3'
+    solverBot.send_input_gui(command)
+    
+#00FF00 - verde 
+def stall_fixed():
+    print_coloured.print_cyan_ts("Conflitto superato... continuo a giocare")
+    webhook = DiscordWebhook(url=webhook_url)
+    embed = DiscordEmbed(title="Intervento",
+                     description="Conflitto superato... continuo a giocare! ", color="00ff00")
+    embed.set_author(name="Ferrets is happy")
+    embed.set_footer(text="TCP?")
+    embed.set_timestamp()
+    webhook.add_embed(embed)
+    response = webhook.execute()
+
+
+
 
 
 try:
@@ -63,7 +94,11 @@ try:
         print(f"\n{Fore.MAGENTA}------------------Iterazione({general_counter})------------------{Style.RESET_ALL}")
         start_time = datetime.datetime.now()  # debugging tempo
 
-
+        #potenziale fix when stuck
+        if consecutive_error == 80:
+            check_error()
+            
+        
         time.sleep(0.8)  # Ossigeno al processore
 
         # Cattura screenshot
@@ -92,6 +127,9 @@ try:
 
             print(
                 f'{Fore.GREEN}Check della matrice andato a buon fine!{Style.RESET_ALL}')
+            
+            if consecutive_error == 80:
+                stall_fixed()
             consecutive_error = 0
             solverBot.scan_matrice(matrix_number)     # Esegue una mossa in base alla matrice di item dati in input
         else:
@@ -116,10 +154,29 @@ try:
         
         if (general_counter % 500 == 0):     # Controllo memoria 
             memory_stats("Print")
+            
+        how_much = 2000
+        if (general_counter % how_much == 0):     
+            # Controllo memoria
+            memory_stats("Print")  
+            # Update bot discord
+            webhookL = DiscordWebhook(url=luke_webhook)
+            embed = DiscordEmbed(title="Update",
+            description=f"⬤ Complimenti hai raggiunto {general_counter} iterazioni!", color="03b2f8")
+            embed.set_timestamp()
+            webhookL.add_embed(embed)
+            screenBot.take_screenshot(830, 60, 570, 960,label='_dd_termination')
+            with open("./Screenshot/screenshot_dd_termination.png", "rb") as f:    
+                webhookL.add_file(file=f.read(), filename="screenshot_dd_termination.png")
+            response = webhookL.execute()
+            print_coloured.print_green_ts("Webhook sent!")
+
 
 
 
     memory_stats("Stop")
+    
+    
 except Exception as e:
     print(f"Errore{e}")
     webhook = DiscordWebhook(url=webhook_url)
@@ -141,6 +198,17 @@ embed.set_footer(text="TCP?")
 embed.set_timestamp()
 webhook.add_embed(embed)
 response = webhook.execute()
+
+
+webhookL = DiscordWebhook(url=luke_webhook)
+embed = DiscordEmbed(title="Update",
+description=f"TERMINAZIONE", color="03b2f8")
+embed.set_timestamp()
+webhookL.add_embed(embed)
+screenBot.take_screenshot(830, 60, 570, 960,label='_dd_termination')
+with open("./Screenshot/screenshot_dd_termination.png", "rb") as f:    
+    webhookL.add_file(file=f.read(), filename="screenshot_dd_termination.png")
+response = webhookL.execute()
 
 
 #ctrl+h
