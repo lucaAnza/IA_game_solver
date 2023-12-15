@@ -153,5 +153,5 @@ if (__name__ == '__main__'):
     
     for j in range(1):
         time.sleep(2)
-        take_screenshot(870, 330, 490, 620,label=f'-{j}cut-')
+        take_screenshot(870, 330, 490, 620,label=f'-{j}PPixel-')
         
