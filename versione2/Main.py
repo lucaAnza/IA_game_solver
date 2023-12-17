@@ -187,7 +187,7 @@ try:
         start_time = datetime.datetime.now()  # debugging tempo
 
         # logica per new_game:
-        if general_counter == 80:
+        if general_counter == 8000:
             try:
                 asc = fig.renderText("TERMINAZIONE GAME")
                 print_coloured.print_red_ts("")
