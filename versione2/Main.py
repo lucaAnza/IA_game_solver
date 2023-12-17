@@ -80,8 +80,12 @@ def create_new_game():
     embed.set_timestamp()
     webhook.add_embed(embed)
     response = webhook.execute()
-    
+    #Logica per riavere la matrice funzionale 
+    time.sleep(20)
+    command = 'alt+3'
+    solverBot.send_input_gui(command)
     time.sleep(2)
+
     label = f'kz32'
     screenBot.take_screenshot(870, 330, 490, 620, label)
     img_name = f"Screenshot/screenshot{label}.png"
@@ -112,6 +116,7 @@ def create_new_game():
         solverBot.send_input_gui('a+')
         time.sleep(4)
         counter += 1
+        
     # tempo esaurito, iniziare nuova partita
     print_coloured.print_green_ts("partita terminata! currently in the end game menu")
     time.sleep(5)
@@ -162,7 +167,7 @@ try:
     fig = pyfiglet.Figlet()
     ascii_art = fig.renderText(testo)
     print(f"{Fore.GREEN} {ascii_art} {Style.RESET_ALL}", end='')
-    # print(f"{Fore.GREEN}Developed by lanza & manillin !{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}Developed by lucaAnza & Manillin !{Style.RESET_ALL}")
     print("\n\n")
     print(f"{Fore.GREEN}Press S to start! {Style.RESET_ALL}", end='')
     fuck_it_we_ball = input("")
@@ -182,12 +187,11 @@ try:
         start_time = datetime.datetime.now()  # debugging tempo
 
         # logica per new_game:
-        if general_counter == 8000:
+        if general_counter == 80:
             try:
                 asc = fig.renderText("TERMINAZIONE GAME")
                 print_coloured.print_red_ts("")
                 print(f"{Fore.RED}{asc}{Style.RESET_ALL}")
-                time.sleep(4)
                 create_new_game()
                 consecutive_error = 0
                 general_counter = 0
