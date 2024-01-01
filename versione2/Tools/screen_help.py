@@ -104,17 +104,17 @@ def set_grill(immagine, top_left=(0, 0), square_side=40, righe=6, colonne=5):
 
 if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
 
-    attesa = 1
+    attesa = 2
     for i in range(attesa):
         print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
 
-    # path = take_screenshot(866,333,501,627,debug=True,fullScreen=False, label='[HELP]')
-    # immagine = cv2.imread(path)
+    path = take_screenshot(866,333,501,627,debug=True,fullScreen=True, label='[HELPEEEE]')
+    immagine = cv2.imread(path)
 
-    immagine = cv2.imread("test_img.png")
-    set_grill(immagine, (5, 20), square_side=93)
-    cv2.imwrite("output.png", immagine)
+    '''immagine = cv2.imread("./screenshotkz32.png")
+    set_grill(immagine, (9, 23), square_side=94)    # cambiare per pc luca
+    cv2.imwrite("output.png", immagine)'''
 
     # Verifica che l'immagine sia stata caricata correttamente
     if immagine is None:
