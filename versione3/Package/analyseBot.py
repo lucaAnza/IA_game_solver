@@ -111,8 +111,8 @@ if (__name__ == "__main__"):
     
     #matrix_number = get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)   # Lucas-pc
     #matrix_number = get_matrix_item(immagine , type="Number" , x = 9 , y = 23 , side = 94)   # Chris-pc
-    matrix_number = get_matrix_item(immagine , type="Number" , x = 6 , y = 23 , side = 94) 
     
+    matrix_number = get_matrix_item(immagine , type="Number" , x = 5 , y = 20 , side = 93)  # Used for test
     print_matrix(matrix_number)
 
     script_name = sys.argv[0]

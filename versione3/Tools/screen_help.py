@@ -7,22 +7,8 @@ import time
 import cv2
 import sys
 
-# SCREEN
-
-""" PC LUCA """
-# Pixel attuale : x = 870, y = 330, height = 490, width = 620
-# Ritaglio : x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
-#            immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
-""" PC CRISTIAN """
-# screenBot.take_screenshot(866,333,501,627, label)
-# Ritaglio : x_inizio, y_inizio, larghezza, altezza = 16, 30, 455, 546
-#            immagine_ritagliata = immagine[y_inizio:y_inizio + altezza, x_inizio:x_inizio + larghezza]
-
-""" PC Luca senza taglio """
-# Pixel ipotetico x = 886 , y = 360 , height = 455 , width = 546 -> (886,360,455,546)
-
-# GRILL1  ->     top_left = (5,20) , square_side = 94
-# GRILL-LUCA ->     top_left = (5,20) , square_side = 93
+# GRILL-LUCA ->  top_left = (5,20) , square_side = 93
+# GRILL-CRI  ->  ...
 
 
 # Funzione che esegue uno screenshot
@@ -46,25 +32,13 @@ def take_screenshot(x=0, y=0, width=500, height=500, label="", debug=False, full
     return file_path
 
 
-# Funzione che salva tante immgini in modo tale da capire la più adatta
-def analysis_screenshot():
-
-    x = 1
-    y = 1
-    moltiplicatore = 300
-    for i in range(3):
-        for j in range(3):
-            x = moltiplicatore * i
-            y = moltiplicatore * j
-            print(f"screen x = {x}, y = {y} : {i}{j}")
-            take_screenshot(x, y, label=f'{i}{j}')
-
-
+#Funzione che stampa le coordinate del pixel cliccato
 def click_event(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         print(f'\nCoordinate del pixel: ({x}, {y})')
 
 
+#Funzione che definisce una griglia su un immagine
 def set_grill(immagine, top_left=(0, 0), square_side=40, righe=6, colonne=5):
 
     color_square = (0, 0, 255)  # Colore in formato BGR (rosso)
@@ -99,22 +73,32 @@ def set_grill(immagine, top_left=(0, 0), square_side=40, righe=6, colonne=5):
         x_centro = (top_lx[0] + bot_rx[0]) // 2
         y_centro = (top_lx[1] + bot_rx[1]) // 2
 
-    # Old version -> #cv2.circle(immagine, (x_centro, y_centro), thickness_dot, color_dot ,-1)
 
 
-if (__name__ == '__main__'):        # Controlla se è eseguita direttamente
+# Controlla se è eseguita direttamente
+if (__name__ == '__main__'):        
 
-    attesa = 2
-    for i in range(attesa):
-        print(f"Screen tra {attesa-i} secondi...")
+    
+    str_menu = "\Menu:\1.Fullscreen screenshot\n2.Cut screenshot + Set grill\n3+.Exit\n"
+    scelta = input(str_menu)
+    attesa = 4   # tempo attesa per screenshot
+
+
+    if(scelta == 1):      # Fullscreen
+        for i in range(attesa):
+            print(f"Screen tra {attesa-i} secondi...")
         time.sleep(1)
-
-    path = take_screenshot(866,333,501,627,debug=True,fullScreen=True, label='[HELPEEEE]')
-    immagine = cv2.imread(path)
-
-    '''immagine = cv2.imread("./screenshotkz32.png")
-    set_grill(immagine, (9, 23), square_side=94)    # cambiare per pc luca
-    cv2.imwrite("output.png", immagine)'''
+        path = take_screenshot(870, 330, 490, 620,fullScreen=True, label='Full')
+        immagine = cv2.imread(path)
+    elif(scelta == 2):
+        for i in range(attesa):
+            print(f"Screen tra {attesa-i} secondi...")
+        time.sleep(1)
+        path = take_screenshot(870, 330, 490, 620,fullScreen=True, label='Full')
+        immagine = cv2.imread(path)
+        set_grill(immagine, (5, 20), square_side=93)    # cambiare in base al pc
+        cv2.imwrite("output.png", immagine)
+    
 
     # Verifica che l'immagine sia stata caricata correttamente
     if immagine is None:

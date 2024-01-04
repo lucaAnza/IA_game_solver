@@ -1,3 +1,1 @@
-prova file versione
-
-cc
+This file is associated to versione 3

@@ -31,3 +31,9 @@ Use Bluestack's macros
 1. One digit integer
 2. Multiple digit integer
 3. Matrix of integers
+
+## 3. Recognize item using pixels ( No IA )
+
+## 4. Implement algoritm that can resolve a game like candy crush 
+
+## 5. Merge -> Macro + Recogniser + Algoritm in order to create a bot that is able to play alone.
