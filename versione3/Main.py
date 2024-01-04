@@ -14,6 +14,8 @@ import pyautogui
 chri_webhook = "https://discord.com/api/webhooks/1184788603470090320/jqkYHRC-y7P920AYLdB1e08g1WPLWzIcelEssk1tG23VXXE2kvgsNUQUhg5q7fYZ86hU"
 luke_webhook = "https://discord.com/api/webhooks/1184915602431823944/3HyIjU1u40NnJUVpzzfBAEOAHZ9EZkiUwEeViffQLOxUwLpU25-dRR0-LJlx2snXbdsH"
 
+game_iteration = 8000 + 10
+
 # Coordinate Luke
 """
 x = 5
@@ -181,7 +183,7 @@ try:
         start_time = datetime.datetime.now()  # debugging tempo
 
         # logica per new_game:
-        if general_counter == 8000:
+        if general_counter == game_iteration:
             try:
                 asc = fig.renderText("TERMINAZIONE GAME")
                 print_coloured.print_red_ts("")
