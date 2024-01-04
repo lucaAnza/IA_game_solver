@@ -258,7 +258,7 @@ try:
             memory_stats("Print")
             
             # Update bot discord
-            webhook_print(luke_webhook , "Update" , f"⬤ Complimenti hai raggiunto {general_counter} iterazioni!" , color = '03b2f8' , img_name='screenshot_{general_counter}_iterazioni.png')
+            webhook_print(luke_webhook , "Update" , f"⬤ Complimenti hai raggiunto {general_counter} iterazioni!" , color = '03b2f8' , img_name=f'screenshot_{general_counter}_iterazioni.png')
             webhookL = DiscordWebhook(url=luke_webhook)
             print_coloured.print_green_ts("Webhook sent!")
     memory_stats("Stop")
