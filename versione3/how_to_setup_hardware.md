@@ -7,7 +7,7 @@
 3. pip install --upgrade pillow  
 
 
-## STEP2
+## STEP2 ( Setting Visual Studio Code )
 
 1. Eseguire uno screenshot avendo l'app vodafone aperta in fullscreen usando **/Tools/screen_help.py** (scelta=1)
 
@@ -21,6 +21,14 @@ in fullscreen.
 5. Aiutandoti con paint analizza l'immagine **output.png** e dovresti fare in modo di avere un puntino nello stesso punto per ogni item.
 
 6. Dare in input a **Package/analyseBot.py** l'immagine **output.png** che ci sembra quella settata con la migliore griglia.
+
+
+
+## STEP3 ( Setting Bluestacks )
+
+1. Vai in impostazioni e togli CTRL+M sui **shortcut**
+2. Importa le Macro
+3. Cambia le 3 Macro finali ( Alt+5  , Alt+6 , Alt+7)
 
 
 ## STEP-Extra
