@@ -14,19 +14,19 @@ import pyautogui
 chri_webhook = "https://discord.com/api/webhooks/1184788603470090320/jqkYHRC-y7P920AYLdB1e08g1WPLWzIcelEssk1tG23VXXE2kvgsNUQUhg5q7fYZ86hU"
 luke_webhook = "https://discord.com/api/webhooks/1184915602431823944/3HyIjU1u40NnJUVpzzfBAEOAHZ9EZkiUwEeViffQLOxUwLpU25-dRR0-LJlx2snXbdsH"
 
-game_iteration = 8000 + 10
+game_iteration = 0 + 10
 
 # Coordinate Luke
-"""
-x = 5
-y = 20
-side = 93
-"""
+x_global = 5
+y_global = 20
+side_global = 93
 
+"""
 # Coordinate Chrii
 x_global = 6
 y_global = 23
 side_global = 94
+"""
 
     
 
@@ -37,12 +37,13 @@ def webhook_print( url , title , description , img_name = None , color = 'ff0000
     embed = DiscordEmbed(title=title,
                          description=description, color=color)
     embed.set_timestamp()
-    embed.set_author(name="Very SAD Ferrets")
     embed.set_footer(text = pc_user)
+    webhook.add_embed(embed)
 
     if(trofei_screen):
         if(img_name != None):
-            screenBot.take_screenshot(870, 290, 490, 200, label='_dd_termination')  # Trofei screen
+            #screenBot.take_screenshot(870, 290, 490, 200, label='_dd_termination')  # Trofei screen
+            screenBot.take_screenshot(830, 60, 570, 960, label='_dd_termination')   # Full App screen
             with open("./Screenshot/screenshot_dd_termination.png", "rb") as f:
                 webhook.add_file(file=f.read(), filename=img_name)
     else:
@@ -257,7 +258,7 @@ try:
             memory_stats("Print")
             
             # Update bot discord
-            webhook_print(luke_webhook , "Update" , "⬤ Complimenti hai raggiunto {general_counter} iterazioni!" , color = '03b2f8' , img_name='screenshot_{general_counter}_iterazioni.png')
+            webhook_print(luke_webhook , "Update" , f"⬤ Complimenti hai raggiunto {general_counter} iterazioni!" , color = '03b2f8' , img_name='screenshot_{general_counter}_iterazioni.png')
             webhookL = DiscordWebhook(url=luke_webhook)
             print_coloured.print_green_ts("Webhook sent!")
     memory_stats("Stop")
