@@ -14,7 +14,7 @@ import pyautogui
 chri_webhook = "https://discord.com/api/webhooks/1184788603470090320/jqkYHRC-y7P920AYLdB1e08g1WPLWzIcelEssk1tG23VXXE2kvgsNUQUhg5q7fYZ86hU"
 luke_webhook = "https://discord.com/api/webhooks/1184915602431823944/3HyIjU1u40NnJUVpzzfBAEOAHZ9EZkiUwEeViffQLOxUwLpU25-dRR0-LJlx2snXbdsH"
 
-game_iteration = 0 + 10
+game_iteration = 8000 + 10
 
 # Coordinate Luke
 x_global = 5
