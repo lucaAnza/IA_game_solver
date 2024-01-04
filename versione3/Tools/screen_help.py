@@ -79,34 +79,50 @@ def set_grill(immagine, top_left=(0, 0), square_side=40, righe=6, colonne=5):
 if (__name__ == '__main__'):        
 
     
-    str_menu = "\Menu:\1.Fullscreen screenshot\n2.Cut screenshot + Set grill\n3+.Exit\n"
-    scelta = input(str_menu)
+    str_menu = "\nMenu:\n1. Fullscreen screenshot\n2. Cut screenshot + Set grill\n3+. Exit\n-> "
+    scelta = int(input(str_menu))
     attesa = 4   # tempo attesa per screenshot
+
 
 
     if(scelta == 1):      # Fullscreen
         for i in range(attesa):
             print(f"Screen tra {attesa-i} secondi...")
-        time.sleep(1)
+            time.sleep(1)
+
         path = take_screenshot(870, 330, 490, 620,fullScreen=True, label='Full')
         immagine = cv2.imread(path)
+        # Verifica che l'immagine sia stata caricata correttamente
+        if immagine is None:
+            print("Errore nel caricamento dell'immagine.")
+            sys.exit()
+
+        # Mostra l'immagine e imposta la funzione di callback del mouse
+        cv2.imshow('Immagine', immagine)
+        cv2.setMouseCallback('Immagine', click_event)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     elif(scelta == 2):
         for i in range(attesa):
             print(f"Screen tra {attesa-i} secondi...")
-        time.sleep(1)
+            time.sleep(1)
+            
         path = take_screenshot(870, 330, 490, 620,fullScreen=True, label='Full')
         immagine = cv2.imread(path)
         set_grill(immagine, (5, 20), square_side=93)    # cambiare in base al pc
         cv2.imwrite("output.png", immagine)
+        # Verifica che l'immagine sia stata caricata correttamente
+        if immagine is None:
+            print("Errore nel caricamento dell'immagine.")
+            sys.exit()
+
+        # Mostra l'immagine e imposta la funzione di callback del mouse
+        cv2.imshow('Immagine', immagine)
+        cv2.setMouseCallback('Immagine', click_event)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    else:
+        print("Exit...")
     
 
-    # Verifica che l'immagine sia stata caricata correttamente
-    if immagine is None:
-        print("Errore nel caricamento dell'immagine.")
-        sys.exit()
-
-    # Mostra l'immagine e imposta la funzione di callback del mouse
-    cv2.imshow('Immagine', immagine)
-    cv2.setMouseCallback('Immagine', click_event)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+ 

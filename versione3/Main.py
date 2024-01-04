@@ -35,7 +35,8 @@ def webhook_print( url , title , description , img_name = None , color = 'ff0000
     embed = DiscordEmbed(title=title,
                          description=description, color=color)
     embed.set_timestamp()
-    webhook.add_embed(embed)
+    embed.set_author(name="Very SAD Ferrets")
+    embed.set_footer(text = pc_user)
 
     if(trofei_screen):
         if(img_name != None):
@@ -47,8 +48,6 @@ def webhook_print( url , title , description , img_name = None , color = 'ff0000
             screenBot.take_screenshot(830, 60, 570, 960, label='_dd_termination')   # Full App screen
             with open("./Screenshot/screenshot_dd_termination.png", "rb") as f: 
                 webhook.add_file(file=f.read(), filename=img_name)
-            
-    webhook.set_footer(text = pc_user)
     response = webhook.execute()   # Invio webhook
 
 

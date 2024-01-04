@@ -3,13 +3,9 @@
 ## STEP1 ( Configurazione librerie )
 
 1. scrivere "python3" nella powershell e scaricare python dallo store
-2. pip3 install virtualenv
-3. python3 -m venv __/path/to/new/virtual/environment__
-4. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-5. .\Scripts\activate
-6. pip3 install -r requirements.txt
+2. pip3 install -r requirements.txt       ( scarichi le librerie )
+3. pip install --upgrade pillow  
 
-### Extra : Nel caso si voglia disattivare l'ambiente virtuale ./Scripts/deactivate
 
 ## STEP2
 
@@ -25,3 +21,18 @@ in fullscreen.
 5. Aiutandoti con paint analizza l'immagine **output.png** e dovresti fare in modo di avere un puntino nello stesso punto per ogni item.
 
 6. Dare in input a **Package/analyseBot.py** l'immagine **output.png** che ci sembra quella settata con la migliore griglia.
+
+
+## STEP-Extra
+
+### Nel caso si volesse usare un ambiente virtuale ecco come settarlo
+
+1. pip3 install virtualenv
+2. python3 -m venv __/path/to/new/virtual/environment__
+3. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+4. .\Scripts\activate       ( attivazione ambiente virtuale)
+5. pip3 install -r requirements.txt     (scarichi le librerie)
+6. pip3 freeze > requirements.txt  ( nel caso vuoi salvare le librerie )
+7. .\Script\deactivate   ( disattivazione ambiente virtuale)
+
+

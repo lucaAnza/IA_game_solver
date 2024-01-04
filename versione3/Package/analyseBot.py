@@ -98,7 +98,7 @@ if (__name__ == "__main__"):
     inizio = time.time()
 
 
-    nome_file_immagine = "../Screenshot/screenshotkz32.png"
+    nome_file_immagine = "./Screenshot/screenshotkz32.png"
     immagine = cv2.imread(nome_file_immagine)
 
     # Verifica che l'immagine sia stata caricata correttamente
